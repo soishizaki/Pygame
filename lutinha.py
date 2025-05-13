@@ -87,6 +87,15 @@ while game:
             pulo2 = False
             velocidade_pulo2 = 0
 
+    # Limites horizontais
+    x1 = max(0, min(x1, largura - largura_personagem))
+    x2 = max(0, min(x2, largura - largura_personagem))
+
+    # Limites verticais (evita que bugue o pulo)
+    y1 = min(y1, chao - altura_personagem)
+    y2 = min(y2, chao - altura_personagem)
+
+
     # Desenha o fundo na tela
     tela.blit(fundo, (0, 0))
 
