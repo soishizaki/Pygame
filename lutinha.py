@@ -39,15 +39,26 @@ clock = pygame.time.Clock()
 
 # Plataformas (x, y, largura, altura)         #Rect cria retângulo 
 plataformas = [
-    pygame.Rect(200, 400, 150, 20),
+    pygame.Rect(200, 400, 400, 20),
     pygame.Rect(500, 300, 200, 20),
     pygame.Rect(750, 450, 120, 20),
-    pygame.Rect(100, 250, 100, 20)
+    pygame.Rect(100, 270, 100, 20),
+    pygame.Rect(300, 200, 150, 20),
+    pygame.Rect(600, 160, 280, 20)
 ]
 
 # Função para desenhar os personagens
 def desenhar_personagem(x, y, cor):
     pygame.draw.rect(tela, cor, (x, y, largura_personagem, altura_personagem))
+
+def esta_no_chao_ou_plataforma(x, y):
+    rect = pygame.Rect(x, y, largura_personagem, altura_personagem)
+    if y + altura_personagem >= chao:
+        return True
+    for plataforma in plataformas:
+        if rect.colliderect(plataforma.move(0, -1)):  # Pequeno ajuste para evitar bug visual
+            return True
+    return False
 
 # Loop do jogo
 game = True
@@ -65,7 +76,7 @@ while game:
         x1 -= velocidade
     if teclas[pygame.K_RIGHT]:
         x1 += velocidade
-    if teclas[pygame.K_UP] and not pulo1:
+    if teclas[pygame.K_UP] and not pulo1 and esta_no_chao_ou_plataforma(x1, y1):
         pulo1 = True
         velocidade_pulo1 = -forca_pulo
 
@@ -74,7 +85,7 @@ while game:
         x2 -= velocidade
     if teclas[pygame.K_d]:
         x2 += velocidade
-    if teclas[pygame.K_w] and not pulo2:
+    if teclas[pygame.K_w] and not pulo2 and esta_no_chao_ou_plataforma(x2, y2):
         pulo2 = True
         velocidade_pulo2 = -forca_pulo
 
@@ -82,39 +93,45 @@ while game:
     rect1 = pygame.Rect(x1, y1, largura_personagem, altura_personagem)
     rect2 = pygame.Rect(x2, y2, largura_personagem, altura_personagem)
 
-    # Lógica da gravidade para o jogador 1
-    if pulo1:
+    # Jogador 1 - gravidade
+    if pulo1 or not esta_no_chao_ou_plataforma(x1, y1 + 1):
         y1 += velocidade_pulo1
         velocidade_pulo1 += gravidade
-        rect1.y = y1
-        colidiu = False
-        for plataforma in plataformas:                   
+        rect1 = pygame.Rect(x1, y1, largura_personagem, altura_personagem)
+
+        for plataforma in plataformas:
             if rect1.colliderect(plataforma) and velocidade_pulo1 >= 0:
                 y1 = plataforma.y - altura_personagem
-                pulo1 = False
                 velocidade_pulo1 = 0
-                colidiu = True
+                pulo1 = False
                 break
-        if y1 >= chao - altura_personagem:
+        if y1 + altura_personagem >= chao:
             y1 = chao - altura_personagem
-            pulo1 = False
             velocidade_pulo1 = 0
+            pulo1 = False
+    else:
+        velocidade_pulo1 = 0
+        pulo1 = False
 
-    # Lógica da gravidade para o jogador 2
-    if pulo2:
+    # Jogador 2 - gravidade
+    if pulo2 or not esta_no_chao_ou_plataforma(x2, y2 + 1):
         y2 += velocidade_pulo2
         velocidade_pulo2 += gravidade
-        rect2.y = y2
+        rect2 = pygame.Rect(x2, y2, largura_personagem, altura_personagem)
+
         for plataforma in plataformas:
             if rect2.colliderect(plataforma) and velocidade_pulo2 >= 0:
                 y2 = plataforma.y - altura_personagem
-                pulo2 = False
                 velocidade_pulo2 = 0
+                pulo2 = False
                 break
-        if y2 >= chao - altura_personagem:
+        if y2 + altura_personagem >= chao:
             y2 = chao - altura_personagem
-            pulo2 = False
             velocidade_pulo2 = 0
+            pulo2 = False
+    else:
+        velocidade_pulo2 = 0
+        pulo2 = False
 
     # Limites horizontais
     x1 = max(0, min(x1, largura - largura_personagem))
