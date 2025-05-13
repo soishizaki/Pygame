@@ -90,11 +90,11 @@ def desenhar_personagem(x, y, cor):
 def desenhar_barras_de_vida():
     # Jogador 1 (branco)
     pygame.draw.rect(tela, (255, 0, 0), (50, 30, largura_barra, altura_barra))  # Barra vermelha (fundo)
-    pygame.draw.rect(tela, (0, 255, 0), (50, 30, largura_barra * (vida1 / 100), altura_barra))  # Vida
+    pygame.draw.rect(tela, (0, 255, 0), (50, 30, largura_barra * (vida2 / 100), altura_barra))  # Vida
 
     # Jogador 2 (preto)
     pygame.draw.rect(tela, (255, 0, 0), (largura - 50 - largura_barra, 30, largura_barra, altura_barra))  # Fundo
-    pygame.draw.rect(tela, (0, 255, 0), (largura - 50 - largura_barra, 30, largura_barra * (vida2 / 100), altura_barra))
+    pygame.draw.rect(tela, (0, 255, 0), (largura - 50 - largura_barra, 30, largura_barra * (vida1 / 100), altura_barra))
 
 # Função para ver se o personagem está no chão/plataforma
 def esta_no_chao_ou_plataforma(x, y):
@@ -233,7 +233,7 @@ while game:
             elif item["tipo"] == "arma":
                 poderes["p1_arma"] = time.time() + 10
             elif item["tipo"] == "fruta":
-                vida1 = min(100, vida1 + 20)
+                vida1 = min(100, vida1 + 2)
             itens.remove(item)
 
         elif rect2.colliderect(item["rect"]):
@@ -242,15 +242,15 @@ while game:
             elif item["tipo"] == "arma":
                 poderes["p2_arma"] = time.time() + 10
             elif item["tipo"] == "fruta":
-                vida2 = min(100, vida2 + 20)
+                vida2 = min(100, vida2 + 2)
             itens.remove(item)
 
 
     #ATAQUE (TESTE 1)
 
     agora = time.time()
-    dano_faca = 10
-    dano_tiro = 5
+    dano_faca = 2
+    dano_tiro = 1
     distancia_ataque = 60
     vel_tiro = 10
 
