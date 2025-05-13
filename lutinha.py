@@ -1,4 +1,7 @@
 import pygame
+import random 
+import time
+
 
 # Inicia PyGame
 pygame.init()
@@ -52,6 +55,29 @@ plataformas = [
     pygame.Rect(600, 160, 280, 20)
 ]
 
+itens = []  # Lista de itens no mapa
+
+# Poderes ativos com tempo de expiração
+poderes = {
+    "p1_faca": 0,
+    "p1_arma": 0,
+    "p2_faca": 0,
+    "p2_arma": 0,
+}
+
+
+# Ícones dos itens (depois a gnt troca pra imagem) 
+faca_img = pygame.Surface((20, 20))
+faca_img.fill((200, 200, 200))  # cinza claro
+
+arma_img = pygame.Surface((20, 20))
+arma_img.fill((50, 50, 255))  # azul
+
+fruta_img = pygame.Surface((20, 20))
+fruta_img.fill((0, 255, 0))  # verde
+
+# -------------------------------------FUNÇÕES------------------------------------------------
+
 # Função para desenhar os personagens
 def desenhar_personagem(x, y, cor):
     pygame.draw.rect(tela, cor, (x, y, largura_personagem, altura_personagem))
@@ -76,6 +102,24 @@ def esta_no_chao_ou_plataforma(x, y):
             return True
     return False
 
+def spawn_item():
+    tipo = random.choice(["faca", "arma", "fruta"])
+    x = random.randint(50, largura - 70)
+    y = random.randint(100, altura - 70)
+    itens.append({"tipo": tipo, "rect": pygame.Rect(x, y, 20, 20)})
+
+def desenhar_itens():
+    for item in itens:
+        if item["tipo"] == "faca":
+            tela.blit(faca_img, item["rect"])
+        elif item["tipo"] == "arma":
+            tela.blit(arma_img, item["rect"])
+        elif item["tipo"] == "fruta":
+            tela.blit(fruta_img, item["rect"])
+
+
+
+#--------------------------------------------------------------------------------------------------------
 # Loop do jogo
 game = True
 while game:
@@ -149,6 +193,11 @@ while game:
         velocidade_pulo2 = 0
         pulo2 = False
 
+    # Spawn de itens aleatoios
+    if random.randint(0, 200) == 0:  # chance de aparecer item
+        spawn_item() 
+
+
     # Limites horizontais
     x1 = max(0, min(x1, largura - largura_personagem))
     x2 = max(0, min(x2, largura - largura_personagem))
@@ -166,10 +215,31 @@ while game:
         pygame.draw.rect(tela, cinza, plataforma)
     
 
-    # Desenha os dois personagens e as barras de vida
+    # Desenha os dois personagens, barras de vida e itens
     desenhar_personagem(x1, y1, branco)
     desenhar_personagem(x2, y2, preto)
     desenhar_barras_de_vida() 
+    desenhar_itens()
+
+    # Verificar se os personagens pegaram algum item
+    for item in itens[:]:
+        if rect1.colliderect(item["rect"]):
+            if item["tipo"] == "faca":
+                poderes["p1_faca"] = time.time() + 10
+            elif item["tipo"] == "arma":
+                poderes["p1_arma"] = time.time() + 10
+            elif item["tipo"] == "fruta":
+                vida1 = min(100, vida1 + 20)
+            itens.remove(item)
+
+        elif rect2.colliderect(item["rect"]):
+            if item["tipo"] == "faca":
+                poderes["p2_faca"] = time.time() + 10
+            elif item["tipo"] == "arma":
+                poderes["p2_arma"] = time.time() + 10
+            elif item["tipo"] == "fruta":
+                vida2 = min(100, vida2 + 20)
+            itens.remove(item)
 
     # Atualiza a tela
     pygame.display.flip()
