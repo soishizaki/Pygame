@@ -24,8 +24,8 @@ altura_personagem = 50
 chao = altura - 100  # 100 é a altura do chão (onde os personagens vão "pisar")
 
 # Posições iniciais dos personagens
-x1, y1 = 100, chao - altura_personagem  # Posição do jogador 1 (setas)
-x2, y2 = 800, chao - altura_personagem  # Posição do jogador 2 (WASD)
+x1, y1 = 800, chao - altura_personagem  # Posição do jogador 1 (setas)
+x2, y2 = 100, chao - altura_personagem  # Posição do jogador 2 (WASD)
 
 velocidade = 5
 gravidade = 1
@@ -56,8 +56,6 @@ while game:
         x1 -= velocidade
     if teclas[pygame.K_RIGHT]:
         x1 += velocidade
-    if teclas[pygame.K_DOWN]:
-        y1 += velocidade
     if teclas[pygame.K_UP] and not pulo1:
         pulo1 = True
         velocidade_pulo1 = -forca_pulo
@@ -67,8 +65,6 @@ while game:
         x2 -= velocidade
     if teclas[pygame.K_d]:
         x2 += velocidade
-    if teclas[pygame.K_s]:
-        y2 += velocidade
     if teclas[pygame.K_w] and not pulo2:
         pulo2 = True
         velocidade_pulo2 = -forca_pulo
