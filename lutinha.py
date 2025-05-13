@@ -65,6 +65,10 @@ poderes = {
     "p2_arma": 0,
 }
 
+# Lista de tiros ativos
+tiros = []
+
+
 
 # Ícones dos itens (depois a gnt troca pra imagem) 
 faca_img = pygame.Surface((20, 20))
@@ -240,6 +244,48 @@ while game:
             elif item["tipo"] == "fruta":
                 vida2 = min(100, vida2 + 20)
             itens.remove(item)
+
+
+    #ATAQUE (TESTE 1)
+
+    agora = time.time()
+    dano_faca = 10
+    dano_tiro = 5
+    distancia_ataque = 60
+    vel_tiro = 10
+
+
+    # Ataque com faca
+    if teclas[pygame.K_f] and poderes["p2_faca"] > agora:
+        if abs(x2 - x1) < distancia_ataque and abs(y2 - y1) < altura_personagem:
+            vida1 = max(0, vida1 - dano_faca)
+
+    if teclas[pygame.K_l] and poderes["p1_faca"] > agora:
+        if abs(x1 - x2) < distancia_ataque and abs(y1 - y2) < altura_personagem:
+            vida2 = max(0, vida2 - dano_faca)
+
+    # Atirar com arma
+    if teclas[pygame.K_f] and poderes["p2_arma"] > agora:
+        tiros.append({"x": x2 + largura_personagem, "y": y2 + altura_personagem // 2, "direcao": 1, "dono": 2})
+
+    if teclas[pygame.K_l] and poderes["p1_arma"] > agora:
+        tiros.append({"x": x1, "y": y1 + altura_personagem // 2, "direcao": -1, "dono": 1})
+
+    # Atualizar e desenhar tiros
+    for tiro in tiros[:]:
+        tiro["x"] += tiro["direcao"] * vel_tiro
+        pygame.draw.circle(tela, (255, 255, 0), (int(tiro["x"]), int(tiro["y"])), 5)
+
+        if tiro["dono"] == 1 and rect2.collidepoint(tiro["x"], tiro["y"]):
+            vida2 = max(0, vida2 - dano_tiro)
+            tiros.remove(tiro)
+        elif tiro["dono"] == 2 and rect1.collidepoint(tiro["x"], tiro["y"]):
+            vida1 = max(0, vida1 - dano_tiro)
+            tiros.remove(tiro)
+        elif tiro["x"] < 0 or tiro["x"] > largura:
+            tiros.remove(tiro)
+
+
 
     # Atualiza a tela
     pygame.display.flip()
