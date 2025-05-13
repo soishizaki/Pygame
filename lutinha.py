@@ -25,15 +25,6 @@ vida1, vida2 = 100, 100  # Vida inicial dos dois jogadores
 largura_barra = 300
 altura_barra = 20
 
-def desenhar_barras_de_vida():
-    # Jogador 1 (branco)
-    pygame.draw.rect(tela, (255, 0, 0), (50, 30, largura_barra, altura_barra))  # Barra vermelha (fundo)
-    pygame.draw.rect(tela, (0, 255, 0), (50, 30, largura_barra * (vida1 / 100), altura_barra))  # Vida
-
-    # Jogador 2 (preto)
-    pygame.draw.rect(tela, (255, 0, 0), (largura - 50 - largura_barra, 30, largura_barra, altura_barra))  # Fundo
-    pygame.draw.rect(tela, (0, 255, 0), (largura - 50 - largura_barra, 30, largura_barra * (vida2 / 100), altura_barra))
-
 
 # Definir a altura do chão (baseado na altura da tela e na altura dos personagens)
 chao = altura - 100  # 100 é a altura do chão (onde os personagens vão "pisar")
@@ -65,6 +56,17 @@ plataformas = [
 def desenhar_personagem(x, y, cor):
     pygame.draw.rect(tela, cor, (x, y, largura_personagem, altura_personagem))
 
+# Função para desenhar barras de vida
+def desenhar_barras_de_vida():
+    # Jogador 1 (branco)
+    pygame.draw.rect(tela, (255, 0, 0), (50, 30, largura_barra, altura_barra))  # Barra vermelha (fundo)
+    pygame.draw.rect(tela, (0, 255, 0), (50, 30, largura_barra * (vida1 / 100), altura_barra))  # Vida
+
+    # Jogador 2 (preto)
+    pygame.draw.rect(tela, (255, 0, 0), (largura - 50 - largura_barra, 30, largura_barra, altura_barra))  # Fundo
+    pygame.draw.rect(tela, (0, 255, 0), (largura - 50 - largura_barra, 30, largura_barra * (vida2 / 100), altura_barra))
+
+# Função para ver se o personagem está no chão/plataforma
 def esta_no_chao_ou_plataforma(x, y):
     rect = pygame.Rect(x, y, largura_personagem, altura_personagem)
     if y + altura_personagem >= chao:
