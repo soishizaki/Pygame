@@ -105,7 +105,7 @@ def esta_no_chao_ou_plataforma(x, y):
 def spawn_item():
     tipo = random.choice(["faca", "arma", "fruta"])
     x = random.randint(50, largura - 70)
-    y = random.randint(100, altura - 70)
+    y = random.randint(100, chao - 30)
     itens.append({"tipo": tipo, "rect": pygame.Rect(x, y, 20, 20)})
 
 def desenhar_itens():
@@ -194,7 +194,7 @@ while game:
         pulo2 = False
 
     # Spawn de itens aleatoios
-    if random.randint(0, 200) == 0:  # chance de aparecer item
+    if random.randint(0, 300) == 0:  # chance de aparecer item
         spawn_item() 
 
 
