@@ -13,8 +13,9 @@ fundo_original = pygame.image.load("imagens/fundo.png").convert()
 fundo = pygame.transform.scale(fundo_original, (largura, altura))
 
 # Cores
-BRANCO = (255, 255, 255)
-PRETO = (0, 0, 0)
+branco = (255, 255, 255)
+preto = (0, 0, 0)
+cinza = (150, 150, 150)
 
 # Parâmetros do personagem
 largura_personagem = 50
@@ -35,6 +36,14 @@ velocidade_pulo1, velocidade_pulo2 = 0, 0
 
 # Criação do relógio para controlar FPS
 clock = pygame.time.Clock()
+
+# Plataformas (x, y, largura, altura)         #Rect cria retângulo 
+plataformas = [
+    pygame.Rect(200, 400, 150, 20),
+    pygame.Rect(500, 300, 200, 20),
+    pygame.Rect(750, 450, 120, 20),
+    pygame.Rect(100, 250, 100, 20)
+]
 
 # Função para desenhar os personagens
 def desenhar_personagem(x, y, cor):
@@ -69,11 +78,24 @@ while game:
         pulo2 = True
         velocidade_pulo2 = -forca_pulo
 
+     # Retângulos dos personagens
+    rect1 = pygame.Rect(x1, y1, largura_personagem, altura_personagem)
+    rect2 = pygame.Rect(x2, y2, largura_personagem, altura_personagem)
+
     # Lógica da gravidade para o jogador 1
     if pulo1:
         y1 += velocidade_pulo1
         velocidade_pulo1 += gravidade
-        if y1 >= chao - altura_personagem:  # Quando o jogador atinge o chão
+        rect1.y = y1
+        colidiu = False
+        for plataforma in plataformas:                   
+            if rect1.colliderect(plataforma) and velocidade_pulo1 >= 0:
+                y1 = plataforma.y - altura_personagem
+                pulo1 = False
+                velocidade_pulo1 = 0
+                colidiu = True
+                break
+        if y1 >= chao - altura_personagem:
             y1 = chao - altura_personagem
             pulo1 = False
             velocidade_pulo1 = 0
@@ -82,7 +104,14 @@ while game:
     if pulo2:
         y2 += velocidade_pulo2
         velocidade_pulo2 += gravidade
-        if y2 >= chao - altura_personagem:  # Quando o jogador atinge o chão
+        rect2.y = y2
+        for plataforma in plataformas:
+            if rect2.colliderect(plataforma) and velocidade_pulo2 >= 0:
+                y2 = plataforma.y - altura_personagem
+                pulo2 = False
+                velocidade_pulo2 = 0
+                break
+        if y2 >= chao - altura_personagem:
             y2 = chao - altura_personagem
             pulo2 = False
             velocidade_pulo2 = 0
@@ -99,9 +128,14 @@ while game:
     # Desenha o fundo na tela
     tela.blit(fundo, (0, 0))
 
+    # Desenhar plataformas
+    for plataforma in plataformas:
+        pygame.draw.rect(tela, cinza, plataforma)
+    
+
     # Desenha os dois personagens
-    desenhar_personagem(x1, y1, BRANCO)
-    desenhar_personagem(x2, y2, PRETO)
+    desenhar_personagem(x1, y1, branco)
+    desenhar_personagem(x2, y2, preto)
 
     # Atualiza a tela
     pygame.display.flip()
