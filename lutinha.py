@@ -102,9 +102,6 @@ fruta_img.fill((0, 255, 0))  # verde
 
 # -------------------------------------FUNÇÕES------------------------------------------------
 
-# Função para desenhar os personagens
-# def desenhar_personagem(x, y, cor):
-#     pygame.draw.rect(tela, cor, (x, y, largura_personagem, altura_personagem))
 
 # Função para desenhar barras de vida
 def desenhar_barras_de_vida():
@@ -325,13 +322,16 @@ while game:
     sprite1 = sprites_amarelo[indice_animacao1] if jogador1_andando else sprites_amarelo[0]
     if direcao1 == -1:
         sprite1 = pygame.transform.flip(sprite1, True, False)
-    tela.blit(sprite1, (x1, y1))
+    sprite1_rect = sprite1.get_rect()
+    tela.blit(sprite1, (x1 - sprite1_rect.width/3-10, y1 - sprite1_rect.height/3))
+    # pygame.draw.rect(tela, (255,0,0), rect1)
 
     # Jogador 2
     sprite2 = sprites_azul[indice_animacao2] if jogador2_andando else sprites_azul[0]
     if direcao2 == -1:
         sprite2 = pygame.transform.flip(sprite2, True, False)
-    tela.blit(sprite2, (x2, y2))
+    sprite2_rect = sprite2.get_rect()
+    tela.blit(sprite2, (x2 - sprite2_rect.width/3-10, y2 - sprite2_rect.height/3))
 
     desenhar_barras_de_vida() 
     desenhar_itens()
