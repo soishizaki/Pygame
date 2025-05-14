@@ -12,7 +12,7 @@ tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Lutinha")
 
 # Determina o fundo (podemos trocar depois, é só colocar a imagem q a gente quiser com o nome 'fundo.png' na pasta imagens)
-fundo_original = pygame.image.load("imagens/fundo.png").convert()
+fundo_original = pygame.image.load("imagens/fundo1.png").convert()
 fundo = pygame.transform.scale(fundo_original, (largura, altura))
 
 #Imagem flecha 
@@ -38,8 +38,8 @@ altura_barra = 20
 chao = altura - 100  # 100 é a altura do chão (onde os personagens vão "pisar")
 
 # Posições iniciais dos personagens
-x1, y1 = 800, chao - altura_personagem  # Posição do jogador 1 (setas)
-x2, y2 = 100, chao - altura_personagem  # Posição do jogador 2 (WASD)
+x1, y1 = 600, chao - altura_personagem  # Posição do jogador 1 (setas)
+x2, y2 = 300, chao - altura_personagem  # Posição do jogador 2 (WASD)
 
 velocidade = 5
 gravidade = 1
@@ -97,21 +97,21 @@ faca_img.fill((200, 200, 200))  # cinza claro
 arma_img = pygame.Surface((20, 20))
 arma_img.fill((50, 50, 255))  # azul
 
-fruta_img = pygame.Surface((20, 20))
-fruta_img.fill((0, 255, 0))  # verde
+fruta_img = pygame.image.load("imagens/fruta.png").convert_alpha()
+fruta_img = pygame.transform.scale(fruta_img, (70, 70)) #ajuste tamanho 
 
 # -------------------------------------FUNÇÕES------------------------------------------------
 
 
 # Função para desenhar barras de vida
 def desenhar_barras_de_vida():
-    # Jogador 1 (branco)
+    # Jogador 1 (azul)
     pygame.draw.rect(tela, (255, 0, 0), (50, 30, largura_barra, altura_barra))  # Barra vermelha (fundo)
-    pygame.draw.rect(tela, (0, 255, 0), (50, 30, largura_barra * (vida2 / 100), altura_barra))  # Vida
+    pygame.draw.rect(tela, (80, 150, 255), (50, 30, largura_barra * (vida2 / 100), altura_barra))  # Vida
 
-    # Jogador 2 (preto)
+    # Jogador 2 (amarelo)
     pygame.draw.rect(tela, (255, 0, 0), (largura - 50 - largura_barra, 30, largura_barra, altura_barra))  # Fundo
-    pygame.draw.rect(tela, (0, 255, 0), (largura - 50 - largura_barra, 30, largura_barra * (vida1 / 100), altura_barra))
+    pygame.draw.rect(tela, (255, 219, 88), (largura - 50 - largura_barra, 30, largura_barra * (vida1 / 100), altura_barra))
 
 # Função para ver se o personagem está no chão/plataforma
 def esta_no_chao_ou_plataforma(x, y):
