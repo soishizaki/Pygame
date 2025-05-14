@@ -15,6 +15,11 @@ pygame.display.set_caption("Lutinha")
 fundo_original = pygame.image.load("imagens/fundo.png").convert()
 fundo = pygame.transform.scale(fundo_original, (largura, altura))
 
+#Imagem flecha 
+flecha_img = pygame.image.load("imagens/flecha.png").convert_alpha()
+flecha_img = pygame.transform.scale(flecha_img, (60, 30)) #ajuste tamanho 
+
+
 # Cores
 branco = (255, 255, 255)
 preto = (0, 0, 0)
@@ -327,7 +332,14 @@ while game:
     # Atualizar e desenhar tiros
     for tiro in tiros[:]:
         tiro["x"] += tiro["direcao"] * vel_tiro
-        pygame.draw.circle(tela, (255, 255, 0), (int(tiro["x"]), int(tiro["y"])), 5)
+        # Gira a imagem se a direção for para a esquerda
+        if tiro["direcao"] < 0:
+            flecha = pygame.transform.flip(flecha_img, True, False)
+        else:
+            flecha = flecha_img
+
+        # Desenha a imagem na posição do tiro
+        tela.blit(flecha, (int(tiro["x"]), int(tiro["y"])))
 
         if tiro["dono"] == 1 and rect2.collidepoint(tiro["x"], tiro["y"]):
             vida2 = max(0, vida2 - dano_tiro)
