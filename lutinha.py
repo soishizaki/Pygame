@@ -49,6 +49,9 @@ direcao2 = 1
 # Flags de controle para impedir múltiplos tiros com tecla pressionada
 pode_atirar_p1 = True
 pode_atirar_p2 = True
+# Flags de controle para impedir múltiplos ataques com faca segurando a tecla
+pode_usar_faca_p1 = True
+pode_usar_faca_p2 = True
 
 # Criação do relógio para controlar FPS
 clock = pygame.time.Clock()
@@ -158,11 +161,32 @@ while game:
                     })
                     pode_atirar_p2 = False
 
-            if event.type == pygame.KEYUP:
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_l:
+                        pode_atirar_p1 = True
+                    if event.key == pygame.K_f:
+                        pode_atirar_p2 = True
+
+                # Ataque com faca - jogador 1
+                if event.key == pygame.K_l and poderes["p1_faca"] > time.time() and pode_usar_faca_p1:
+                    if abs(x1 - x2) < distancia_ataque and abs(y1 - y2) < altura_personagem:
+                        vida2 = max(0, vida2 - dano_faca)
+                    pode_usar_faca_p1 = False
+
+                # Ataque com faca - jogador 2
+                if event.key == pygame.K_f and poderes["p2_faca"] > time.time() and pode_usar_faca_p2:
+                    if abs(x2 - x1) < distancia_ataque and abs(y2 - y1) < altura_personagem:
+                        vida1 = max(0, vida1 - dano_faca)
+                    pode_usar_faca_p2 = False
+
                 if event.key == pygame.K_l:
                     pode_atirar_p1 = True
+                    pode_usar_faca_p1 = True
+
                 if event.key == pygame.K_f:
                     pode_atirar_p2 = True
+                    pode_usar_faca_p2 = True
+
 
             if event.type == pygame.QUIT:
                 game = False
@@ -298,16 +322,6 @@ while game:
     dano_tiro = 1
     distancia_ataque = 60
     vel_tiro = 10
-
-
-    # Ataque com faca
-    if teclas[pygame.K_f] and poderes["p2_faca"] > agora:
-        if abs(x2 - x1) < distancia_ataque and abs(y2 - y1) < altura_personagem:
-            vida1 = max(0, vida1 - dano_faca)
-
-    if teclas[pygame.K_l] and poderes["p1_faca"] > agora:
-        if abs(x1 - x2) < distancia_ataque and abs(y1 - y2) < altura_personagem:
-            vida2 = max(0, vida2 - dano_faca)
 
 
     # Atualizar e desenhar tiros
