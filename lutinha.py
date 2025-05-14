@@ -42,6 +42,14 @@ forca_pulo = 15
 pulo1, pulo2 = False, False
 velocidade_pulo1, velocidade_pulo2 = 0, 0
 
+# Direção atual dos jogadores (1 = direita, -1 = esquerda)
+direcao1 = -1
+direcao2 = 1
+
+# Flags de controle para impedir múltiplos tiros com tecla pressionada
+pode_atirar_p1 = True
+pode_atirar_p2 = True
+
 # Criação do relógio para controlar FPS
 clock = pygame.time.Clock()
 
@@ -129,8 +137,35 @@ game = True
 while game:
     # Processa os eventos
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            game = False
+            if event.type == pygame.KEYDOWN:
+                # Atirar jogador 1
+                if event.key == pygame.K_l and poderes["p1_arma"] > time.time() and pode_atirar_p1:
+                    tiros.append({
+                        "x": x1 + (largura_personagem if direcao1 == 1 else 0),
+                        "y": y1 + altura_personagem // 2,
+                        "direcao": direcao1,
+                        "dono": 1
+                    })
+                    pode_atirar_p1 = False
+
+                # Atirar jogador 2
+                if event.key == pygame.K_f and poderes["p2_arma"] > time.time() and pode_atirar_p2:
+                    tiros.append({
+                        "x": x2 + (largura_personagem if direcao2 == 1 else 0),
+                        "y": y2 + altura_personagem // 2,
+                        "direcao": direcao2,
+                        "dono": 2
+                    })
+                    pode_atirar_p2 = False
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_l:
+                    pode_atirar_p1 = True
+                if event.key == pygame.K_f:
+                    pode_atirar_p2 = True
+
+            if event.type == pygame.QUIT:
+                game = False
 
     # Obtém o estado das teclas
     teclas = pygame.key.get_pressed()
@@ -138,8 +173,10 @@ while game:
     # Movimentação e pulo para o jogador 1 (setas)
     if teclas[pygame.K_LEFT]:
         x1 -= velocidade
+        direcao1 = -1 
     if teclas[pygame.K_RIGHT]:
         x1 += velocidade
+        direcao1 = 1
     if teclas[pygame.K_UP] and not pulo1 and esta_no_chao_ou_plataforma(x1, y1):
         pulo1 = True
         velocidade_pulo1 = -forca_pulo
@@ -147,8 +184,10 @@ while game:
     # Movimentação e pulo para o jogador 2 (WASD)
     if teclas[pygame.K_a]:
         x2 -= velocidade
+        direcao2 = -1
     if teclas[pygame.K_d]:
         x2 += velocidade
+        direcao2 = 1 
     if teclas[pygame.K_w] and not pulo2 and esta_no_chao_ou_plataforma(x2, y2):
         pulo2 = True
         velocidade_pulo2 = -forca_pulo
@@ -174,6 +213,9 @@ while game:
             velocidade_pulo1 = 0
             pulo1 = False
     else:
+        for plataforma in plataformas:
+            if rect1.colliderect(plataforma):
+                y1 = plataforma.y - altura_personagem
         velocidade_pulo1 = 0
         pulo1 = False
 
@@ -194,6 +236,9 @@ while game:
             velocidade_pulo2 = 0
             pulo2 = False
     else:
+        for plataforma in plataformas:
+            if rect2.colliderect(plataforma) and velocidade_pulo2 >= 0:
+                y2 = plataforma.y - altura_personagem
         velocidade_pulo2 = 0
         pulo2 = False
 
@@ -264,12 +309,6 @@ while game:
         if abs(x1 - x2) < distancia_ataque and abs(y1 - y2) < altura_personagem:
             vida2 = max(0, vida2 - dano_faca)
 
-    # Atirar com arma
-    if teclas[pygame.K_f] and poderes["p2_arma"] > agora:
-        tiros.append({"x": x2 + largura_personagem, "y": y2 + altura_personagem // 2, "direcao": 1, "dono": 2})
-
-    if teclas[pygame.K_l] and poderes["p1_arma"] > agora:
-        tiros.append({"x": x1, "y": y1 + altura_personagem // 2, "direcao": -1, "dono": 1})
 
     # Atualizar e desenhar tiros
     for tiro in tiros[:]:
