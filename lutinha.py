@@ -84,7 +84,11 @@ poderes = {
 # Lista de tiros ativos
 tiros = []
 
-
+# Parâmetros para animação 
+indice_animacao1 = 0
+indice_animacao2 = 0
+tempo_ultima_animacao = 0
+intervalo_animacao = 100  # milissegundos entre quadros
 
 # Ícones dos itens (depois a gnt troca pra imagem) 
 faca_img = pygame.Surface((20, 20))
@@ -99,8 +103,8 @@ fruta_img.fill((0, 255, 0))  # verde
 # -------------------------------------FUNÇÕES------------------------------------------------
 
 # Função para desenhar os personagens
-def desenhar_personagem(x, y, cor):
-    pygame.draw.rect(tela, cor, (x, y, largura_personagem, altura_personagem))
+# def desenhar_personagem(x, y, cor):
+#     pygame.draw.rect(tela, cor, (x, y, largura_personagem, altura_personagem))
 
 # Função para desenhar barras de vida
 def desenhar_barras_de_vida():
@@ -137,6 +141,15 @@ def desenhar_itens():
         elif item["tipo"] == "fruta":
             tela.blit(fruta_img, item["rect"])
 
+# Carrega e divide os sprites em listas de quadros (TRECHO GERADO PELO CHATGPT)
+def carregar_sprites(nome_arquivo):
+    imagem = pygame.image.load(nome_arquivo).convert_alpha()
+    largura_quadro = imagem.get_width() // 6
+    altura_quadro = imagem.get_height()
+    return [imagem.subsurface(pygame.Rect(i * largura_quadro, 0, largura_quadro, altura_quadro)) for i in range(6)]
+
+sprites_amarelo = carregar_sprites("imagens/personagem_amarelo.png")
+sprites_azul = carregar_sprites("imagens/personagem_azul.png")
 
 
 #--------------------------------------------------------------------------------------------------------
@@ -275,6 +288,19 @@ while game:
     if random.randint(0, 300) == 0:  # chance de aparecer item
         spawn_item() 
 
+    # Trecho para animação funcionar (próximas 10 linhas geradas pelo chatgpt)
+    # Verifica se há movimento para cada jogador
+    jogador1_andando = teclas[pygame.K_RIGHT] or teclas[pygame.K_LEFT]
+    jogador2_andando = teclas[pygame.K_a] or teclas[pygame.K_d]
+
+    agora_ms = pygame.time.get_ticks()
+
+    if agora_ms - tempo_ultima_animacao > intervalo_animacao:
+        if jogador1_andando:
+            indice_animacao1 = (indice_animacao1 + 1) % 6
+        if jogador2_andando:
+            indice_animacao2 = (indice_animacao2 + 1) % 6
+        tempo_ultima_animacao = agora_ms
 
     # Limites horizontais
     x1 = max(0, min(x1, largura - largura_personagem))
@@ -294,8 +320,19 @@ while game:
     
 
     # Desenha os dois personagens, barras de vida e itens
-    desenhar_personagem(x1, y1, branco)
-    desenhar_personagem(x2, y2, preto)
+
+    # Jogador 1
+    sprite1 = sprites_amarelo[indice_animacao1] if jogador1_andando else sprites_amarelo[0]
+    if direcao1 == -1:
+        sprite1 = pygame.transform.flip(sprite1, True, False)
+    tela.blit(sprite1, (x1, y1))
+
+    # Jogador 2
+    sprite2 = sprites_azul[indice_animacao2] if jogador2_andando else sprites_azul[0]
+    if direcao2 == -1:
+        sprite2 = pygame.transform.flip(sprite2, True, False)
+    tela.blit(sprite2, (x2, y2))
+
     desenhar_barras_de_vida() 
     desenhar_itens()
 
