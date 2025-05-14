@@ -302,7 +302,7 @@ while game:
             elif item["tipo"] == "arma":
                 poderes["p1_arma"] = time.time() + 10
             elif item["tipo"] == "fruta":
-                vida1 = min(100, vida1 + 2)
+                vida1 = min(100, vida1 + 1)
             itens.remove(item)
 
         elif rect2.colliderect(item["rect"]):
@@ -311,15 +311,15 @@ while game:
             elif item["tipo"] == "arma":
                 poderes["p2_arma"] = time.time() + 10
             elif item["tipo"] == "fruta":
-                vida2 = min(100, vida2 + 2)
+                vida2 = min(100, vida2 + 1)
             itens.remove(item)
 
 
     #ATAQUE (TESTE 1)
 
     agora = time.time()
-    dano_faca = 2
-    dano_tiro = 1
+    dano_faca = 1
+    dano_tiro = 0.5
     distancia_ataque = 60
     vel_tiro = 10
 
