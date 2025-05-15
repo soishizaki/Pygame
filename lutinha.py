@@ -95,7 +95,7 @@ faca_img = pygame.Surface((20, 20))
 faca_img.fill((200, 200, 200))  # cinza claro
 
 arma_img = pygame.image.load("imagens/arco.png").convert_alpha()
-arma_img = pygame.transform.scale(arma_img, (70, 70)) #ajuste tamanho
+arma_img = pygame.transform.scale(arma_img, (70, 70)) #ajuste tamanho 
 
 fruta_img = pygame.image.load("imagens/fruta.png").convert_alpha()
 fruta_img = pygame.transform.scale(fruta_img, (70, 70)) #ajuste tamanho 
