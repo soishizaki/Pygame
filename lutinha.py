@@ -84,6 +84,16 @@ poderes = {
     "p2_arma": 0,
 }
 
+andando_sprite_espada_azul = False
+andando_sprite_espada_amarelo = False
+atacando_sprite_espada_azul = False
+atacando_sprite_espada_amarelo = False
+
+andando_sprite_arco_azul = False
+andando_sprite_arco_amarelo = False
+atacando_sprite_arco_azul = False
+atacando_sprite_arco_amarelo = False
+
 # Lista de tiros ativos
 tiros = []
 
@@ -150,6 +160,16 @@ def carregar_sprites(nome_arquivo):
 
 sprites_amarelo = carregar_sprites("imagens/personagem_amarelo.png")
 sprites_azul = carregar_sprites("imagens/personagem_azul.png")
+
+sprites_amarelo_espada = carregar_sprites("imagens/espada_amarelo_andando.png")
+sprites_azul_espada_andando = carregar_sprites("imagens/espada_azul_andando.png")
+sprites_amarelo_espada_atacando = carregar_sprites("imagens/espada_amarelo_atacando.png")
+sprites_azul_espada_atacando = carregar_sprites("imagens/espada_azul_atacando.png")
+
+sprites_amarelo_arco_andando = carregar_sprites("imagens/arqueiro_amarelo_andando.png")
+sprites_azul_arco_andando= carregar_sprites("iimagens/arqueiro_azul_andando.png")
+sprites_amarelo_arco_atacando = carregar_sprites("imagens/arqueiro_amarelo_atacando.png")
+sprites_azul_arco_atacando= carregar_sprites("imagens/arqueiro_azul_atacando.png")
 
 
 #--------------------------------------------------------------------------------------------------------
@@ -346,8 +366,10 @@ while game:
         if rect1.colliderect(item["rect"]):
             if item["tipo"] == "faca":
                 poderes["p1_faca"] = time.time() + 10
+                andando_sprite_espada_amarelo = True
             elif item["tipo"] == "arma":
                 poderes["p1_arma"] = time.time() + 10
+                andando_sprite_arco_amarelo = True
             elif item["tipo"] == "fruta":
                 vida1 = min(100, vida1 + 1)
             itens.remove(item)
@@ -355,11 +377,14 @@ while game:
         elif rect2.colliderect(item["rect"]):
             if item["tipo"] == "faca":
                 poderes["p2_faca"] = time.time() + 10
+                andando_sprite_espada_azul = True
             elif item["tipo"] == "arma":
                 poderes["p2_arma"] = time.time() + 10
+                andando_sprite_arco_azul = True
             elif item["tipo"] == "fruta":
                 vida2 = min(100, vida2 + 1)
             itens.remove(item)
+
 
 
     #ATAQUE (TESTE 1)
