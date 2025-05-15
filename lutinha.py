@@ -161,7 +161,7 @@ def carregar_sprites(nome_arquivo):
 sprites_amarelo = carregar_sprites("imagens/personagem_amarelo.png")
 sprites_azul = carregar_sprites("imagens/personagem_azul.png")
 
-sprites_amarelo_espada = carregar_sprites("imagens/espada_amarelo_andando.png")
+sprites_amarelo_espada_andando = carregar_sprites("imagens/espada_amarelo_andando.png")
 sprites_azul_espada_andando = carregar_sprites("imagens/espada_azul_andando.png")
 sprites_amarelo_espada_atacando = carregar_sprites("imagens/espada_amarelo_atacando.png")
 sprites_azul_espada_atacando = carregar_sprites("imagens/espada_azul_atacando.png")
@@ -344,7 +344,14 @@ while game:
     # Desenha os dois personagens, barras de vida e itens
 
     # Jogador 1
-    sprite1 = sprites_amarelo[indice_animacao1] if jogador1_andando else sprites_amarelo[0]
+    #sprite1 = sprites_amarelo[indice_animacao1] if jogador1_andando else sprites_amarelo[0]
+    if andando_sprite_arco_amarelo:
+        sprites_atuais1 = sprites_amarelo_arco_andando
+    if andando_sprite_espada_amarelo:
+        sprites_atuais1 = sprites_amarelo_espada_andando 
+    else: 
+         sprites_atuais1 = sprites_amarelo 
+    sprite1 = sprites_atuais1[indice_animacao1] if jogador1_andando else sprites_atuais1[0]
     if direcao1 == -1:
         sprite1 = pygame.transform.flip(sprite1, True, False)
     sprite1_rect = sprite1.get_rect()
@@ -352,11 +359,19 @@ while game:
     # pygame.draw.rect(tela, (255,0,0), rect1)
 
     # Jogador 2
-    sprite2 = sprites_azul[indice_animacao2] if jogador2_andando else sprites_azul[0]
+    #sprite2 = sprites_azul[indice_animacao2] if jogador2_andando else sprites_azul[0]
+    if andando_sprite_arco_azul:
+        sprites_atuais2 = sprites_azul_arco_andando
+    if andando_sprite_espada_azul:
+        sprites_atuais2 = sprites_azul_espada_andando
+    else: 
+         sprites_atuais2 = sprites_azul 
+    sprite2 = sprites_atuais2[indice_animacao2] if jogador2_andando else sprites_atuais2[0]
     if direcao2 == -1:
         sprite2 = pygame.transform.flip(sprite2, True, False)
     sprite2_rect = sprite2.get_rect()
     tela.blit(sprite2, (x2 - sprite2_rect.width/3-10, y2 - sprite2_rect.height/3))
+
 
     desenhar_barras_de_vida() 
     desenhar_itens()
