@@ -12,7 +12,7 @@ tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Lutinha")
 
 # Determina o fundo (podemos trocar depois, é só colocar a imagem q a gente quiser com o nome 'fundo.png' na pasta imagens)
-fundo_original = pygame.image.load("imagens/fundo1.png").convert()
+fundo_original = pygame.image.load("imagens/fundo6.png").convert()
 fundo = pygame.transform.scale(fundo_original, (largura, altura))
 
 #Imagem flecha 
