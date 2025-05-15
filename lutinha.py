@@ -94,6 +94,11 @@ andando_sprite_arco_amarelo = False
 atacando_sprite_arco_azul = False
 atacando_sprite_arco_amarelo = False
 
+tempo_ataque_p1 = 0
+tempo_ataque_p2 = 0
+
+duracao_ataque = 300  # em milissegundos
+
 # Lista de tiros ativos
 tiros = []
 
@@ -188,6 +193,7 @@ while game:
                         "dono": 1
                     })
                     pode_atirar_p1 = False
+                    tempo_ataque_p1 = pygame.time.get_ticks()  # inicia tempo de ataque
 
                 # Atirar jogador 2
                 if event.key == pygame.K_f and poderes["p2_arma"] > time.time() and pode_atirar_p2:
@@ -198,6 +204,7 @@ while game:
                         "dono": 2
                     })
                     pode_atirar_p2 = False
+                    tempo_ataque_p2 = pygame.time.get_ticks()  # inicia tempo de ataque
 
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_l:
@@ -210,12 +217,14 @@ while game:
                     if abs(x1 - x2) < distancia_ataque and abs(y1 - y2) < altura_personagem:
                         vida2 = max(0, vida2 - dano_faca)
                     pode_usar_faca_p1 = False
+                    tempo_ataque_p1 = pygame.time.get_ticks()  # inicia tempo de ataque
 
                 # Ataque com faca - jogador 2
                 if event.key == pygame.K_f and poderes["p2_faca"] > time.time() and pode_usar_faca_p2:
                     if abs(x2 - x1) < distancia_ataque and abs(y2 - y1) < altura_personagem:
                         vida1 = max(0, vida1 - dano_faca)
                     pode_usar_faca_p2 = False
+                    tempo_ataque_p2 = pygame.time.get_ticks()  # inicia tempo de ataque
 
                 if event.key == pygame.K_l:
                     pode_atirar_p1 = True
@@ -314,11 +323,10 @@ while game:
     jogador2_andando = teclas[pygame.K_a] or teclas[pygame.K_d]
 
     agora_ms = pygame.time.get_ticks()
-
     if agora_ms - tempo_ultima_animacao > intervalo_animacao:
-        if jogador1_andando:
+        if jogador1_andando or (agora_ms - tempo_ataque_p1 < duracao_ataque):
             indice_animacao1 = (indice_animacao1 + 1) % 6
-        if jogador2_andando:
+        if jogador2_andando or (agora_ms - tempo_ataque_p2 < duracao_ataque):
             indice_animacao2 = (indice_animacao2 + 1) % 6
         tempo_ultima_animacao = agora_ms
 
@@ -344,14 +352,22 @@ while game:
     # Desenha os dois personagens, barras de vida e itens
 
     # Jogador 1
-    #sprite1 = sprites_amarelo[indice_animacao1] if jogador1_andando else sprites_amarelo[0]
-    if andando_sprite_arco_amarelo:
+    agora_ms = pygame.time.get_ticks()
+    if agora_ms - tempo_ataque_p1 < duracao_ataque:
+        if poderes["p1_faca"] > time.time():
+            sprites_atuais1 = sprites_amarelo_espada_atacando
+        elif poderes["p1_arma"] > time.time():
+            sprites_atuais1 = sprites_amarelo_arco_atacando
+    elif andando_sprite_arco_amarelo:
         sprites_atuais1 = sprites_amarelo_arco_andando
     elif andando_sprite_espada_amarelo:
         sprites_atuais1 = sprites_amarelo_espada_andando 
     else: 
          sprites_atuais1 = sprites_amarelo 
-    sprite1 = sprites_atuais1[indice_animacao1] if jogador1_andando else sprites_atuais1[0]
+    if jogador1_andando or (agora_ms - tempo_ataque_p1 < duracao_ataque):
+        sprite1 = sprites_atuais1[indice_animacao1]
+    else:
+        sprite1 = sprites_atuais1[0]
     if direcao1 == -1:
         sprite1 = pygame.transform.flip(sprite1, True, False)
     sprite1_rect = sprite1.get_rect()
@@ -360,13 +376,22 @@ while game:
 
     # Jogador 2
     #sprite2 = sprites_azul[indice_animacao2] if jogador2_andando else sprites_azul[0]
-    if andando_sprite_arco_azul:
+    agora_ms = pygame.time.get_ticks()
+    if agora_ms - tempo_ataque_p2 < duracao_ataque:
+        if poderes["p2_faca"] > time.time():
+            sprites_atuais2 = sprites_azul_espada_atacando
+        elif poderes["p2_arma"] > time.time():
+            sprites_atuais2 = sprites_azul_arco_atacando
+    elif andando_sprite_arco_azul:
         sprites_atuais2 = sprites_azul_arco_andando
     elif andando_sprite_espada_azul:
         sprites_atuais2 = sprites_azul_espada_andando
     else: 
          sprites_atuais2 = sprites_azul 
-    sprite2 = sprites_atuais2[indice_animacao2] if jogador2_andando else sprites_atuais2[0]
+    if jogador2_andando or (agora_ms - tempo_ataque_p2 < duracao_ataque):
+        sprite2 = sprites_atuais2[indice_animacao2]
+    else:
+        sprite2 = sprites_atuais2[0]
     if direcao2 == -1:
         sprite2 = pygame.transform.flip(sprite2, True, False)
     sprite2_rect = sprite2.get_rect()
