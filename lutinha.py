@@ -74,6 +74,50 @@ plataformas = [
     pygame.Rect(600, 160, 280, 20)
 ]
 
+plataformas2 = [
+    pygame.Rect(100, 450, 300, 20),
+    pygame.Rect(500, 400, 250, 20),
+    pygame.Rect(200, 300, 150, 20),
+    pygame.Rect(600, 250, 200, 20),
+    pygame.Rect(350, 150, 180, 20)
+]
+
+plataformas3 = [
+    pygame.Rect(50, 420, 250, 20),
+    pygame.Rect(350, 380, 180, 20),
+    pygame.Rect(650, 340, 200, 20),
+    pygame.Rect(150, 260, 140, 20),
+    pygame.Rect(500, 200, 220, 20)
+]
+
+plataformas4 = [
+    pygame.Rect(100, 500, 200, 20),
+    pygame.Rect(400, 420, 120, 20),
+    pygame.Rect(700, 350, 100, 20),
+    pygame.Rect(300, 270, 150, 20),
+    pygame.Rect(550, 180, 130, 20)
+]
+
+plataformas5 = [
+    pygame.Rect(150, 400, 200, 20),
+    pygame.Rect(650, 400, 200, 20),
+    pygame.Rect(400, 300, 200, 20),
+    pygame.Rect(250, 200, 150, 20),
+    pygame.Rect(600, 200, 150, 20)
+]
+
+plataformas6 = [
+    pygame.Rect(100, 500, 200, 20),
+    pygame.Rect(300, 400, 200, 20),
+    pygame.Rect(500, 300, 200, 20),
+    pygame.Rect(700, 200, 200, 20),
+    pygame.Rect(400, 100, 200, 20)
+]
+
+opcoes_de_plataformas = [plataformas, plataformas2, plataformas3, plataformas4, plataformas5, plataformas6]
+
+plataformas = random.choice(opcoes_de_plataformas)
+
 itens = []  # Lista de itens no mapa
 
 # Poderes ativos com tempo de expiração
