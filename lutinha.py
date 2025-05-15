@@ -347,7 +347,7 @@ while game:
     #sprite1 = sprites_amarelo[indice_animacao1] if jogador1_andando else sprites_amarelo[0]
     if andando_sprite_arco_amarelo:
         sprites_atuais1 = sprites_amarelo_arco_andando
-    if andando_sprite_espada_amarelo:
+    elif andando_sprite_espada_amarelo:
         sprites_atuais1 = sprites_amarelo_espada_andando 
     else: 
          sprites_atuais1 = sprites_amarelo 
@@ -362,7 +362,7 @@ while game:
     #sprite2 = sprites_azul[indice_animacao2] if jogador2_andando else sprites_azul[0]
     if andando_sprite_arco_azul:
         sprites_atuais2 = sprites_azul_arco_andando
-    if andando_sprite_espada_azul:
+    elif andando_sprite_espada_azul:
         sprites_atuais2 = sprites_azul_espada_andando
     else: 
          sprites_atuais2 = sprites_azul 
@@ -416,7 +416,7 @@ while game:
         andando_sprite_espada_azul = False
     if poderes["p1_arma"] < agora:
         andando_sprite_arco_amarelo = False
-    if poderes["p1_arma"] < agora:
+    if poderes["p2_arma"] < agora:
         andando_sprite_arco_azul = False
 
     # Atualizar e desenhar tiros
