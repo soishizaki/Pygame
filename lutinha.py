@@ -167,7 +167,7 @@ sprites_amarelo_espada_atacando = carregar_sprites("imagens/espada_amarelo_ataca
 sprites_azul_espada_atacando = carregar_sprites("imagens/espada_azul_atacando.png")
 
 sprites_amarelo_arco_andando = carregar_sprites("imagens/arqueiro_amarelo_andando.png")
-sprites_azul_arco_andando= carregar_sprites("iimagens/arqueiro_azul_andando.png")
+sprites_azul_arco_andando= carregar_sprites("imagens/arqueiro_azul_andando.png")
 sprites_amarelo_arco_atacando = carregar_sprites("imagens/arqueiro_amarelo_atacando.png")
 sprites_azul_arco_atacando= carregar_sprites("imagens/arqueiro_azul_atacando.png")
 
