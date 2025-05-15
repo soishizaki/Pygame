@@ -65,7 +65,7 @@ pode_usar_faca_p2 = True
 clock = pygame.time.Clock()
 
 # Plataformas (x, y, largura, altura)         #Rect cria retângulo 
-plataformas = [
+plataformas1 = [
     pygame.Rect(200, 400, 400, 20),
     pygame.Rect(500, 300, 200, 20),
     pygame.Rect(750, 450, 120, 20),
@@ -114,7 +114,7 @@ plataformas6 = [
     pygame.Rect(400, 100, 200, 20)
 ]
 
-opcoes_de_plataformas = [plataformas, plataformas2, plataformas3, plataformas4, plataformas5, plataformas6]
+opcoes_de_plataformas = [plataformas1, plataformas2, plataformas3, plataformas4, plataformas5, plataformas6]
 
 plataformas = random.choice(opcoes_de_plataformas)
 
