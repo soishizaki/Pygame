@@ -395,6 +395,14 @@ while game:
     distancia_ataque = 60
     vel_tiro = 10
 
+    if poderes["p1_faca"] < agora:
+        andando_sprite_espada_amarelo = False
+    if poderes["p2_faca"] < agora:
+        andando_sprite_espada_azul = False
+    if poderes["p1_arma"] < agora:
+        andando_sprite_arco_amarelo = False
+    if poderes["p1_arma"] < agora:
+        andando_sprite_arco_azul = False
 
     # Atualizar e desenhar tiros
     for tiro in tiros[:]:
