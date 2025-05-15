@@ -94,8 +94,8 @@ tempo_ultima_animacao = 0
 intervalo_animacao = 100  # milissegundos entre quadros
 
 # Ícones dos itens (depois a gnt troca pra imagem) 
-faca_img = pygame.Surface((20, 20))
-faca_img.fill((200, 200, 200))  # cinza claro
+faca_img = pygame.image.load("imagens/espada.png").convert_alpha()
+faca_img = pygame.transform.scale(faca_img, (55, 55)) #ajuste tamanho 
 
 arma_img = pygame.image.load("imagens/arco.png").convert_alpha()
 arma_img = pygame.transform.scale(arma_img, (45, 45)) #ajuste tamanho 
