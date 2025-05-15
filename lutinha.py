@@ -406,7 +406,14 @@ while game:
         if rect1.colliderect(item["rect"]):
             if item["tipo"] == "faca":
                 poderes["p1_faca"] = time.time() + 10
+                poderes["p1_arma"] = 0  # cancela o arco
                 andando_sprite_espada_amarelo = True
+                andando_sprite_arco_amarelo = False
+            elif item["tipo"] == "arma":
+                poderes["p1_arma"] = time.time() + 10
+                poderes["p1_faca"] = 0  # cancela a espada
+                andando_sprite_arco_amarelo = True
+                andando_sprite_espada_amarelo = False
             elif item["tipo"] == "arma":
                 poderes["p1_arma"] = time.time() + 10
                 andando_sprite_arco_amarelo = True
@@ -417,10 +424,14 @@ while game:
         elif rect2.colliderect(item["rect"]):
             if item["tipo"] == "faca":
                 poderes["p2_faca"] = time.time() + 10
+                poderes["p2_arma"] = 0  # cancela o arco
                 andando_sprite_espada_azul = True
+                andando_sprite_arco_azul = False
             elif item["tipo"] == "arma":
                 poderes["p2_arma"] = time.time() + 10
+                poderes["p2_faca"] = 0  # cancela a espada
                 andando_sprite_arco_azul = True
+                andando_sprite_espada_azul = False
             elif item["tipo"] == "fruta":
                 vida2 = min(100, vida2 + 1)
             itens.remove(item)
