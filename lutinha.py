@@ -19,6 +19,9 @@ fundo = pygame.transform.scale(fundo_original, (largura, altura))
 flecha_img = pygame.image.load("imagens/flecha.png").convert_alpha()
 flecha_img = pygame.transform.scale(flecha_img, (60, 30)) #ajuste tamanho 
 
+# Imagem plataforma
+plataforma_img = pygame.image.load("imagens/plataforma.png").convert_alpha()
+
 
 # Cores
 branco = (255, 255, 255)
@@ -95,7 +98,7 @@ faca_img = pygame.Surface((20, 20))
 faca_img.fill((200, 200, 200))  # cinza claro
 
 arma_img = pygame.image.load("imagens/arco.png").convert_alpha()
-arma_img = pygame.transform.scale(arma_img, (70, 70)) #ajuste tamanho 
+arma_img = pygame.transform.scale(arma_img, (45, 45)) #ajuste tamanho 
 
 fruta_img = pygame.image.load("imagens/fruta.png").convert_alpha()
 fruta_img = pygame.transform.scale(fruta_img, (70, 70)) #ajuste tamanho 
@@ -313,7 +316,9 @@ while game:
 
     # Desenhar plataformas
     for plataforma in plataformas:
-        pygame.draw.rect(tela, cinza, plataforma)
+    # Redimensiona a imagem para o tamanho da plataforma (largura, altura) e desenha
+        plataforma_img_tamanho_certo = pygame.transform.scale(plataforma_img, (plataforma.width+10, plataforma.height+170))
+        tela.blit(plataforma_img_tamanho_certo, (plataforma.x-10, plataforma.y-85))
     
 
     # Desenha os dois personagens, barras de vida e itens
