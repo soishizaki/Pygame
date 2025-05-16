@@ -88,9 +88,9 @@ plataformas1 = [
 ]
 
 plataformas2 = [
-    pygame.Rect(170, 440, 300, 20),
+    pygame.Rect(200, 440, 300, 20),
     pygame.Rect(500, 370, 250, 20),
-    pygame.Rect(230, 290, 150, 20),
+    pygame.Rect(250, 290, 150, 20),
     pygame.Rect(600, 210, 200, 20),
     pygame.Rect(350, 120, 180, 20)
 ]
@@ -98,21 +98,21 @@ plataformas2 = [
 plataformas3 = [
     pygame.Rect(270, 420, 250, 20),
     pygame.Rect(350, 350, 180, 20),
-    pygame.Rect(650, 320, 200, 20),
+    pygame.Rect(650, 300, 200, 20),
     pygame.Rect(190, 200, 140, 20),
     pygame.Rect(500, 120, 220, 20)
 ]
 
 plataformas4 = [
-    pygame.Rect(170, 400, 200, 20),
+    pygame.Rect(200, 400, 200, 20),
     pygame.Rect(430, 310, 120, 20),
-    pygame.Rect(700, 250, 100, 20),
+    pygame.Rect(700, 230, 100, 20),
     pygame.Rect(320, 160, 150, 20),
     pygame.Rect(550, 100, 130, 20)
 ]
 
 plataformas5 = [
-    pygame.Rect(150, 400, 200, 20),
+    pygame.Rect(200, 400, 200, 20),
     pygame.Rect(650, 350, 200, 20),
     pygame.Rect(400, 220, 200, 20),
     pygame.Rect(250, 190, 150, 20),
@@ -120,10 +120,10 @@ plataformas5 = [
 ]
 
 plataformas6 = [
-    pygame.Rect(140, 430, 200, 20),
+    pygame.Rect(190, 430, 200, 20),
     pygame.Rect(300, 370, 200, 20),
-    pygame.Rect(500, 300, 200, 20),
-    pygame.Rect(700, 220, 200, 20),
+    pygame.Rect(700, 300, 200, 20),
+    pygame.Rect(500, 220, 200, 20),
     pygame.Rect(400, 150, 200, 20)
 ]
 
