@@ -11,9 +11,21 @@ largura, altura = 1000, 600
 tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Lutinha")
 
-# Determina o fundo (podemos trocar depois, é só colocar a imagem q a gente quiser com o nome 'fundo.png' na pasta imagens)
-fundo_original = pygame.image.load("imagens/fundo6.png").convert()
+# Determina o fundo (6 opcoes de fundo que serao escolhidas de forma aleatoria)
+opcoes_de_fundos = [
+    "imagens/fundo1.png",
+    "imagens/fundo2.png",
+    "imagens/fundo3.png",
+    "imagens/fundo4.png",
+    "imagens/fundo5.png",
+    "imagens/fundo6.png"
+    "imagens/fundo7.png"
+]
+
+fundo_escolhido = random.choice(opcoes_de_fundos)
+fundo_original = pygame.image.load(fundo_escolhido).convert()
 fundo = pygame.transform.scale(fundo_original, (largura, altura))
+
 
 #Imagem flecha 
 flecha_img = pygame.image.load("imagens/flecha.png").convert_alpha()
@@ -64,54 +76,54 @@ pode_usar_faca_p2 = True
 # Criação do relógio para controlar FPS
 clock = pygame.time.Clock()
 
-# Plataformas (x, y, largura, altura)         #Rect cria retângulo 
+# 6 opcoes de plataformas (x, y, largura, altura), que serao escolhidas de forma aleatoria        #Rect cria retângulo 
 plataformas1 = [
     pygame.Rect(200, 400, 400, 20),
     pygame.Rect(500, 300, 200, 20),
     pygame.Rect(750, 450, 120, 20),
     pygame.Rect(100, 270, 100, 20),
     pygame.Rect(300, 200, 150, 20),
-    pygame.Rect(600, 160, 280, 20)
+    pygame.Rect(600, 120, 280, 20)
 ]
 
 plataformas2 = [
-    pygame.Rect(100, 450, 300, 20),
-    pygame.Rect(500, 400, 250, 20),
-    pygame.Rect(200, 300, 150, 20),
-    pygame.Rect(600, 250, 200, 20),
-    pygame.Rect(350, 150, 180, 20)
+    pygame.Rect(170, 440, 300, 20),
+    pygame.Rect(500, 370, 250, 20),
+    pygame.Rect(230, 290, 150, 20),
+    pygame.Rect(600, 210, 200, 20),
+    pygame.Rect(350, 120, 180, 20)
 ]
 
 plataformas3 = [
-    pygame.Rect(50, 420, 250, 20),
-    pygame.Rect(350, 380, 180, 20),
-    pygame.Rect(650, 340, 200, 20),
-    pygame.Rect(150, 260, 140, 20),
-    pygame.Rect(500, 200, 220, 20)
+    pygame.Rect(270, 420, 250, 20),
+    pygame.Rect(350, 350, 180, 20),
+    pygame.Rect(650, 320, 200, 20),
+    pygame.Rect(190, 200, 140, 20),
+    pygame.Rect(500, 120, 220, 20)
 ]
 
 plataformas4 = [
-    pygame.Rect(100, 500, 200, 20),
-    pygame.Rect(400, 420, 120, 20),
-    pygame.Rect(700, 350, 100, 20),
-    pygame.Rect(300, 270, 150, 20),
-    pygame.Rect(550, 180, 130, 20)
+    pygame.Rect(170, 400, 200, 20),
+    pygame.Rect(430, 310, 120, 20),
+    pygame.Rect(700, 250, 100, 20),
+    pygame.Rect(320, 160, 150, 20),
+    pygame.Rect(550, 100, 130, 20)
 ]
 
 plataformas5 = [
     pygame.Rect(150, 400, 200, 20),
-    pygame.Rect(650, 400, 200, 20),
-    pygame.Rect(400, 300, 200, 20),
-    pygame.Rect(250, 200, 150, 20),
-    pygame.Rect(600, 200, 150, 20)
+    pygame.Rect(650, 350, 200, 20),
+    pygame.Rect(400, 220, 200, 20),
+    pygame.Rect(250, 190, 150, 20),
+    pygame.Rect(600, 100, 150, 20)
 ]
 
 plataformas6 = [
-    pygame.Rect(100, 500, 200, 20),
-    pygame.Rect(300, 400, 200, 20),
+    pygame.Rect(140, 430, 200, 20),
+    pygame.Rect(300, 370, 200, 20),
     pygame.Rect(500, 300, 200, 20),
-    pygame.Rect(700, 200, 200, 20),
-    pygame.Rect(400, 100, 200, 20)
+    pygame.Rect(700, 220, 200, 20),
+    pygame.Rect(400, 150, 200, 20)
 ]
 
 opcoes_de_plataformas = [plataformas1, plataformas2, plataformas3, plataformas4, plataformas5, plataformas6]
