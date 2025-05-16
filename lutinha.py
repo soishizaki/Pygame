@@ -18,8 +18,9 @@ opcoes_de_fundos = [
     "imagens/fundo3.png",
     "imagens/fundo4.png",
     "imagens/fundo5.png",
-    "imagens/fundo6.png"
-    "imagens/fundo7.png"
+    "imagens/fundo6.png",
+    "imagens/fundo7.png",
+    "imagens/fundo8.png"
 ]
 
 fundo_escolhido = random.choice(opcoes_de_fundos)
