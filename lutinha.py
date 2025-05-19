@@ -233,7 +233,16 @@ def reiniciar_jogo():
     global x2, y2, vida2, pulo2, velocidade_pulo2, andando_sprite_espada_azul, andando_sprite_arco_azul
     global poderes, itens, tiros, tempo_ataque_p1, tempo_ataque_p2
     global indice_animacao1, indice_animacao2, tempo_ultima_animacao
+    global fundo, plataformas
 
+    # fundo aleatorio novamente 
+    fundo_escolhido = random.choice(opcoes_de_fundos)
+    fundo_original = pygame.image.load(fundo_escolhido).convert()
+    fundo = pygame.transform.scale(fundo_original, (largura, altura))
+    
+    # plataformas aleatorias novamente 
+    plataformas = random.choice(opcoes_de_plataformas)
+    
     # Posicoes iniciais
     x1, y1 = 600, chao - altura_personagem
     x2, y2 = 300, chao - altura_personagem
@@ -599,8 +608,8 @@ while game:
     #ATAQUE (TESTE 1)
 
     agora = time.time()
-    dano_faca = 1
-    dano_tiro = 0.5
+    dano_faca = 2
+    dano_tiro = 1
     distancia_ataque = 60
     vel_tiro = 10
 
