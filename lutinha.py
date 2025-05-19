@@ -28,6 +28,12 @@ fundo_original = pygame.image.load(fundo_escolhido).convert()
 fundo = pygame.transform.scale(fundo_original, (largura, altura))
 
 
+# Tela inicial e botão start 
+fundo_inicial = pygame.image.load("imagens/fundo_inicial.png").convert()
+fundo_inicial = pygame.transform.scale(fundo_inicial, (largura, altura))
+botao_start = pygame.Rect(340, 450, 250, 90)  
+
+
 #Imagem flecha 
 flecha_img = pygame.image.load("imagens/flecha.png").convert_alpha()
 flecha_img = pygame.transform.scale(flecha_img, (60, 30)) #ajuste tamanho 
@@ -180,6 +186,22 @@ fruta_img = pygame.transform.scale(fruta_img, (70, 70)) #ajuste tamanho
 
 # -------------------------------------FUNÇÕES------------------------------------------------
 
+# Função para mostrar a tela inicial 
+def mostrar_tela_inicial():
+    while True:
+        tela.blit(fundo_inicial, (0, 0))  # Desenha a imagem na tela
+
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if evento.type == pygame.MOUSEBUTTONDOWN:
+                if botao_start.collidepoint(evento.pos):
+                    return  # Sai da tela inicial
+
+        pygame.display.flip()
+        clock.tick(60)
+
 
 # Função para desenhar barras de vida
 def desenhar_barras_de_vida():
@@ -240,6 +262,10 @@ sprites_azul_arco_atacando= carregar_sprites("imagens/arqueiro_azul_atacando.png
 #--------------------------------------------------------------------------------------------------------
 # Loop do jogo
 game = True
+
+# Puxa tela inicial 
+mostrar_tela_inicial()
+
 while game:
     # Processa os eventos
     for event in pygame.event.get():
