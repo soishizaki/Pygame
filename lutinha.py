@@ -202,6 +202,78 @@ def mostrar_tela_inicial():
         pygame.display.flip()
         clock.tick(60)
 
+# Função para mostrar tela de vitória (IMPORTANTE: MUDAR A IMAGEM DO FUNDO VITÓRIA)
+def mostrar_tela_vitoria(vencedor):
+    if vencedor == "amarelo":
+        fundo_vitoria = pygame.image.load("imagens/fundo_inicial.png").convert()
+        fundo_vitoria = pygame.transform.scale(fundo_vitoria, (largura, altura))
+
+    else:
+        fundo_vitoria = pygame.image.load("imagens/fundo_inicial.png").convert()
+        fundo_vitoria = pygame.transform.scale(fundo_vitoria, (largura, altura))
+
+    botao_restart = pygame.Rect(340, 450, 250, 90)  # área do botão na imagem
+
+    while True:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            elif evento.type == pygame.MOUSEBUTTONDOWN:
+                if botao_restart.collidepoint(evento.pos):
+                    return  # Sai da tela de vitória e reinicia o jogo
+
+        tela.blit(fundo_vitoria, (0, 0))
+        pygame.display.flip()
+        clock.tick(60)
+
+# Função para reiniciar o jogo (zera todas as variáveis)
+def reiniciar_jogo():
+    global x1, y1, vida1, pulo1, velocidade_pulo1, andando_sprite_espada_amarelo, andando_sprite_arco_amarelo
+    global x2, y2, vida2, pulo2, velocidade_pulo2, andando_sprite_espada_azul, andando_sprite_arco_azul
+    global poderes, itens, tiros, tempo_ataque_p1, tempo_ataque_p2
+    global indice_animacao1, indice_animacao2, tempo_ultima_animacao
+
+    # Posicoes iniciais
+    x1, y1 = 600, chao - altura_personagem
+    x2, y2 = 300, chao - altura_personagem
+
+    # Vidas
+    vida1 = 100
+    vida2 = 100
+
+    # Pulos
+    pulo1 = False
+    pulo2 = False
+    velocidade_pulo1 = 0
+    velocidade_pulo2 = 0
+
+    # Flags de animação
+    andando_sprite_espada_amarelo = False
+    andando_sprite_arco_amarelo = False
+    andando_sprite_espada_azul = False
+    andando_sprite_arco_azul = False
+
+    # Poderes com tempo expirado (0 = sem poder)
+    poderes = {
+        "p1_faca": 0,
+        "p1_arma": 0,
+        "p2_faca": 0,
+        "p2_arma": 0,
+    }
+
+    # Limpar listas de itens e tiros
+    itens.clear()
+    tiros.clear()
+
+    # Tempos de ataque resetados
+    tempo_ataque_p1 = 0
+    tempo_ataque_p2 = 0
+
+    # Animação
+    indice_animacao1 = 0
+    indice_animacao2 = 0
+    tempo_ultima_animacao = pygame.time.get_ticks()
 
 # Função para desenhar barras de vida
 def desenhar_barras_de_vida():
@@ -561,6 +633,15 @@ while game:
             tiros.remove(tiro)
         elif tiro["x"] < 0 or tiro["x"] > largura:
             tiros.remove(tiro)
+
+    # Confere se o jogo acabou 
+    if vida1 <= 0:
+        mostrar_tela_vitoria("azul")
+        reiniciar_jogo()  # volta o jogo pro estado inicial
+
+    elif vida2 <= 0:
+        mostrar_tela_vitoria("amarelo")
+        reiniciar_jogo()  # volta o jogo pro estado inicial
 
 
 
