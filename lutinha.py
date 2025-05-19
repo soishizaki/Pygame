@@ -205,11 +205,11 @@ def mostrar_tela_inicial():
 # Função para mostrar tela de vitória (IMPORTANTE: MUDAR A IMAGEM DO FUNDO VITÓRIA)
 def mostrar_tela_vitoria(vencedor):
     if vencedor == "amarelo":
-        fundo_vitoria = pygame.image.load("imagens/fundo_inicial.png").convert()
+        fundo_vitoria = pygame.image.load("imagens/fundo_final_amarelo.png").convert()
         fundo_vitoria = pygame.transform.scale(fundo_vitoria, (largura, altura))
 
     else:
-        fundo_vitoria = pygame.image.load("imagens/fundo_inicial.png").convert()
+        fundo_vitoria = pygame.image.load("imagens/fundo_final_azul.png").convert()
         fundo_vitoria = pygame.transform.scale(fundo_vitoria, (largura, altura))
 
     botao_restart = pygame.Rect(340, 450, 250, 90)  # área do botão na imagem
