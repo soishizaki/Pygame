@@ -237,7 +237,6 @@ def reiniciar_jogo():
 
     # fundo aleatorio novamente 
     fundo_escolhido = random.choice(opcoes_de_fundos)
-    
     fundo_original = pygame.image.load(fundo_escolhido).convert()
     fundo = pygame.transform.scale(fundo_original, (largura, altura))
     
@@ -284,16 +283,7 @@ def reiniciar_jogo():
     indice_animacao1 = 0
     indice_animacao2 = 0
     tempo_ultima_animacao = pygame.time.get_ticks()
-
-    # Plataformas 
-
-    plataformas = random.choice(opcoes_de_plataformas)
-
-    # Fundo
-
-    fundo_escolhido = random.choice(opcoes_de_fundos)
-    fundo_original = pygame.image.load(fundo_escolhido).convert()
-    fundo = pygame.transform.scale(fundo_original, (largura, altura)) 
+ 
 
 # Função para desenhar barras de vida
 def desenhar_barras_de_vida():
