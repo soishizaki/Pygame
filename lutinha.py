@@ -9,7 +9,7 @@ pygame.init()
 # Gera tela principal
 largura, altura = 1000, 600
 tela = pygame.display.set_mode((largura, altura))
-pygame.display.set_caption("Lutinha")
+pygame.display.set_caption("Pixel Clash")
 
 # Determina o fundo (6 opcoes de fundo que serao escolhidas de forma aleatoria)
 opcoes_de_fundos = [
