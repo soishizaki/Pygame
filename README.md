@@ -2,6 +2,7 @@
 Pygame Dessoft - Insper 2025.1
 
 PIXEL CLASH
+
 by Luana Macedo Rocha, Renata Hemsi Leventhal e Sofia Sayuri Ishizaki
 
 
@@ -11,7 +12,10 @@ O objetivo é reduzir a vida do oponente até zero, utilizando estratégia, refl
 
 O jogo é para dois jogadores no mesmo teclado. Cada jogador controla um personagem com um conjunto diferente de teclas. O objetivo é derrotar o adversário esvaziando completamente sua barra de vida.
 
+-----------------------------------------------
+
 Controles do Jogador 1 (Personagem Amarelo)
+
 W – Pular
 
 A – Andar para a esquerda
@@ -20,8 +24,10 @@ D – Andar para a direita
 
 F – Atacar com espada/arco (se estiver equipado)
 
+---------------------------------------------------------
 
 Controles do Jogador 2 (Personagem Azul)
+
 Seta para cima (↑) – Pular
 
 Seta para a esquerda (←) – Andar para a esquerda
@@ -31,6 +37,8 @@ Seta para a direita (→) – Andar para a direita
 L – Atacar com aespada/arco (se estiver equipado)
 
 
+
+-----------------------------------------------------
 
 
 COMO RODAR O JOGO
