@@ -3,8 +3,10 @@ import random
 import time
 
 
-# Inicia PyGame
+# Inicia PyGame (e sons) 
 pygame.init()
+pygame.mixer.init()
+
 
 # Gera tela principal
 largura, altura = 1000, 600
@@ -42,10 +44,10 @@ flecha_img = pygame.transform.scale(flecha_img, (60, 30)) #ajuste tamanho
 plataforma_img = pygame.image.load("imagens/plataforma.png").convert_alpha()
 
 
-# Cores
-branco = (255, 255, 255)
-preto = (0, 0, 0)
-cinza = (150, 150, 150)
+# # Cores
+# branco = (255, 255, 255)
+# preto = (0, 0, 0)
+# cinza = (150, 150, 150)
 
 # Parâmetros do personagem
 largura_personagem = 50
