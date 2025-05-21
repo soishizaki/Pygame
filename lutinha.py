@@ -7,6 +7,20 @@ import time
 pygame.init()
 pygame.mixer.init()
 
+# Sons 
+#Fundo
+#musica_fundo = pygame.mixer.Sound("sons/som_fundo.mp3")
+pygame.mixer.music.load("sons/som_fundo.mp3")
+pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.play(-1)
+
+#Efeitos
+som_ataque_espada = pygame.mixer.Sound("sons/som_espada.mp3")
+som_ataque_flecha = pygame.mixer.Sound ("sons/som_botao_e_flecha.mp3")
+som_botao = pygame.mixer.Sound("sons/som_botao_e_flecha.mp3")
+
+som_ataque_espada.set_volume(0.1)
+
 
 # Gera tela principal
 largura, altura = 1000, 600
@@ -43,11 +57,14 @@ flecha_img = pygame.transform.scale(flecha_img, (60, 30)) #ajuste tamanho
 # Imagem plataforma
 plataforma_img = pygame.image.load("imagens/plataforma.png").convert_alpha()
 
-# Sons 
-musica_fundo = pygame.mixer.Sound("sons/som_fundo.mp3")
-som_ataque_espada = pygame.mixer.Sound("sons/som_espada.mp3")
-som_ataque_flecha = pygame.mixer.Sound ("sons/som_botao_e_flecha.mp3")
-som_botao = pygame.mixer.Sound("sons/som_botao_e_flecha.mp3")
+# # Sons 
+# #musica_fundo = pygame.mixer.Sound("sons/som_fundo.mp3")
+# pygame.mixer.music.load("sons/som_fundo.mp3")
+# pygame.mixer.music.set_volume(0.3)
+# pygame.mixer.music.play(-1)
+# som_ataque_espada = pygame.mixer.Sound("sons/som_espada.mp3")
+# som_ataque_flecha = pygame.mixer.Sound ("sons/som_botao_e_flecha.mp3")
+# som_botao = pygame.mixer.Sound("sons/som_botao_e_flecha.mp3")
 
 # Parâmetros do personagem
 largura_personagem = 50
@@ -199,6 +216,7 @@ def mostrar_tela_inicial():
                 exit()
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 if botao_start.collidepoint(evento.pos):
+                    som_botao.play()
                     return  # Sai da tela inicial
 
         pygame.display.flip()
@@ -223,6 +241,7 @@ def mostrar_tela_vitoria(vencedor):
                 exit()
             elif evento.type == pygame.MOUSEBUTTONDOWN:
                 if botao_restart.collidepoint(evento.pos):
+                    som_botao.play()
                     return  # Sai da tela de vitória e reinicia o jogo
 
         tela.blit(fundo_vitoria, (0, 0))
@@ -364,6 +383,7 @@ while game:
                     })
                     pode_atirar_p1 = False
                     tempo_ataque_p1 = pygame.time.get_ticks()  # inicia tempo de ataque
+                    som_ataque_flecha.play()
 
                 # Atirar jogador 2
                 if event.key == pygame.K_f and poderes["p2_arma"] > time.time() and pode_atirar_p2:
@@ -375,6 +395,7 @@ while game:
                     })
                     pode_atirar_p2 = False
                     tempo_ataque_p2 = pygame.time.get_ticks()  # inicia tempo de ataque
+                    som_ataque_flecha.play()
 
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_l:
@@ -388,6 +409,7 @@ while game:
                         vida2 = max(0, vida2 - dano_faca)
                     pode_usar_faca_p1 = False
                     tempo_ataque_p1 = pygame.time.get_ticks()  # inicia tempo de ataque
+                    som_ataque_espada.play()
 
                 # Ataque com faca - jogador 2
                 if event.key == pygame.K_f and poderes["p2_faca"] > time.time() and pode_usar_faca_p2:
@@ -395,6 +417,7 @@ while game:
                         vida1 = max(0, vida1 - dano_faca)
                     pode_usar_faca_p2 = False
                     tempo_ataque_p2 = pygame.time.get_ticks()  # inicia tempo de ataque
+                    som_ataque_espada.play()
 
                 if event.key == pygame.K_l:
                     pode_atirar_p1 = True
