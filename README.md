@@ -1,6 +1,12 @@
 # Pygame
 Pygame Dessoft - Insper 2025.1
 
+coisas pra fazer:
+- adicionar tela de info e botao/estrututra
+- adicionar docstring nas funções
+
+
+
 PIXEL CLASH
 
 by Luana Macedo Rocha, Renata Hemsi Leventhal e Sofia Sayuri Ishizaki
