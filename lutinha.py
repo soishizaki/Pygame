@@ -43,11 +43,11 @@ flecha_img = pygame.transform.scale(flecha_img, (60, 30)) #ajuste tamanho
 # Imagem plataforma
 plataforma_img = pygame.image.load("imagens/plataforma.png").convert_alpha()
 
-
-# # Cores
-# branco = (255, 255, 255)
-# preto = (0, 0, 0)
-# cinza = (150, 150, 150)
+# Sons 
+musica_fundo = pygame.mixer.Sound("sons/som_fundo.mp3")
+som_ataque_espada = pygame.mixer.Sound("sons/som_espada.mp3")
+som_ataque_flecha = pygame.mixer.Sound ("sons/som_botao_e_flecha.mp3")
+som_botao = pygame.mixer.Sound("sons/som_botao_e_flecha.mp3")
 
 # Parâmetros do personagem
 largura_personagem = 50
