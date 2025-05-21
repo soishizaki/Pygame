@@ -244,9 +244,7 @@ def mostrar_tela_vitoria(vencedor):
                 if botao_restart.collidepoint(evento.pos):
                     som_botao.play()
                     return  # Sai da tela de vitória e reinicia o jogo
-            else:
-                som_ganha.play()
-
+            
         tela.blit(fundo_vitoria, (0, 0))
         pygame.display.flip()
         clock.tick(60)
@@ -680,10 +678,12 @@ while game:
 
     # Confere se o jogo acabou 
     if vida1 <= 0:
+        som_ganha.play()
         mostrar_tela_vitoria("azul")
         reiniciar_jogo()  # volta o jogo pro estado inicial
 
     elif vida2 <= 0:
+        som_ganha.play()
         mostrar_tela_vitoria("amarelo")
         reiniciar_jogo()  # volta o jogo pro estado inicial
 
