@@ -8,18 +8,24 @@ pygame.init()
 pygame.mixer.init()
 
 # Sons 
+
 #Fundo
-#musica_fundo = pygame.mixer.Sound("sons/som_fundo.mp3")
 pygame.mixer.music.load("sons/som_fundo.mp3")
-pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.set_volume(0.05)
 pygame.mixer.music.play(-1)
 
 #Efeitos
 som_ataque_espada = pygame.mixer.Sound("sons/som_espada.mp3")
-som_ataque_flecha = pygame.mixer.Sound ("sons/som_botao_e_flecha.mp3")
+som_ataque_flecha = pygame.mixer.Sound ("sons/som_flecha.wav")
 som_botao = pygame.mixer.Sound("sons/som_botao_e_flecha.mp3")
+som_vida = pygame.mixer.Sound("sons/som_cogumelo.mp3")
+som_pega_espada = pygame.mixer.Sound("sons/som_virou_espada.wav")
+som_pega_arco = pygame.mixer.Sound("sons/som_botao_e_flecha.mp3") 
 
 som_ataque_espada.set_volume(0.1)
+som_ataque_flecha.set_volume(0.1)
+som_vida.set_volume(0.1)
+som_pega_espada.set_volume(0.15)
 
 
 # Gera tela principal
@@ -56,15 +62,6 @@ flecha_img = pygame.transform.scale(flecha_img, (60, 30)) #ajuste tamanho
 
 # Imagem plataforma
 plataforma_img = pygame.image.load("imagens/plataforma.png").convert_alpha()
-
-# # Sons 
-# #musica_fundo = pygame.mixer.Sound("sons/som_fundo.mp3")
-# pygame.mixer.music.load("sons/som_fundo.mp3")
-# pygame.mixer.music.set_volume(0.3)
-# pygame.mixer.music.play(-1)
-# som_ataque_espada = pygame.mixer.Sound("sons/som_espada.mp3")
-# som_ataque_flecha = pygame.mixer.Sound ("sons/som_botao_e_flecha.mp3")
-# som_botao = pygame.mixer.Sound("sons/som_botao_e_flecha.mp3")
 
 # Parâmetros do personagem
 largura_personagem = 50
@@ -602,16 +599,19 @@ while game:
                 poderes["p1_arma"] = 0  # cancela o arco
                 andando_sprite_espada_amarelo = True
                 andando_sprite_arco_amarelo = False
+                som_pega_espada.play()
             elif item["tipo"] == "arma":
                 poderes["p1_arma"] = time.time() + 10
                 poderes["p1_faca"] = 0  # cancela a espada
                 andando_sprite_arco_amarelo = True
                 andando_sprite_espada_amarelo = False
+                som_pega_arco.play()
             elif item["tipo"] == "arma":
                 poderes["p1_arma"] = time.time() + 10
                 andando_sprite_arco_amarelo = True
             elif item["tipo"] == "fruta":
                 vida1 = min(100, vida1 + 1)
+                som_vida.play()
             itens.remove(item)
 
         elif rect2.colliderect(item["rect"]):
@@ -620,13 +620,16 @@ while game:
                 poderes["p2_arma"] = 0  # cancela o arco
                 andando_sprite_espada_azul = True
                 andando_sprite_arco_azul = False
+                som_pega_espada.play()
             elif item["tipo"] == "arma":
                 poderes["p2_arma"] = time.time() + 10
                 poderes["p2_faca"] = 0  # cancela a espada
                 andando_sprite_arco_azul = True
                 andando_sprite_espada_azul = False
+                som_pega_arco.play()
             elif item["tipo"] == "fruta":
                 vida2 = min(100, vida2 + 1)
+                som_vida.play()
             itens.remove(item)
 
 
