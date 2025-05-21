@@ -28,7 +28,7 @@ som_ataque_espada.set_volume(0.1)
 som_ataque_flecha.set_volume(0.1)
 som_vida.set_volume(0.1)
 som_pega_espada.set_volume(0.15)
-som_ganha.set_volume(0.3)
+som_ganha.set_volume(0.2)
 
 
 

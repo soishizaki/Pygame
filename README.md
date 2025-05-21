@@ -43,6 +43,7 @@ L – Atacar com aespada/arco (se estiver equipado)
 
 COMO RODAR O JOGO
 
+Executar arquivo "lutinha.py"
 
 
 
