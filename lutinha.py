@@ -11,7 +11,7 @@ pygame.mixer.init()
 
 #Fundo
 pygame.mixer.music.load("sons/som_fundo.mp3")
-pygame.mixer.music.set_volume(0.05)
+pygame.mixer.music.set_volume(0.04)
 pygame.mixer.music.play(-1)
 
 #Efeitos
@@ -21,11 +21,15 @@ som_botao = pygame.mixer.Sound("sons/som_botao_e_flecha.mp3")
 som_vida = pygame.mixer.Sound("sons/som_cogumelo.mp3")
 som_pega_espada = pygame.mixer.Sound("sons/som_virou_espada.wav")
 som_pega_arco = pygame.mixer.Sound("sons/som_botao_e_flecha.mp3") 
+som_ganha = pygame.mixer.Sound("sons/som_vitoria.wav")
+
 
 som_ataque_espada.set_volume(0.1)
 som_ataque_flecha.set_volume(0.1)
 som_vida.set_volume(0.1)
 som_pega_espada.set_volume(0.15)
+som_ganha.set_volume(0.3)
+
 
 
 # Gera tela principal
@@ -240,6 +244,8 @@ def mostrar_tela_vitoria(vencedor):
                 if botao_restart.collidepoint(evento.pos):
                     som_botao.play()
                     return  # Sai da tela de vitória e reinicia o jogo
+            else:
+                som_ganha.play()
 
         tela.blit(fundo_vitoria, (0, 0))
         pygame.display.flip()
