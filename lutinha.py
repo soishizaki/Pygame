@@ -59,6 +59,18 @@ fundo_inicial = pygame.image.load("imagens/fundo_inicial.png").convert()
 fundo_inicial = pygame.transform.scale(fundo_inicial, (largura, altura))
 botao_start = pygame.Rect(340, 450, 250, 90)  
 
+# Botões e tela info 
+botao_info = pygame.Rect(340, 450, 125, 45)  
+botao_info_img = pygame.image.load("imagens/botao_info.png")
+botao_info_img = pygame.transform.scale(botao_info_img, (125, 45))
+
+botao_back = pygame.Rect(50, 50, 125, 45)  
+botao_back_img = pygame.image.load("imagens/botao_back.png")
+botao_back_img = pygame.transform.scale(botao_back_img, (125, 45))
+
+tela_info = pygame.image.load("imagens/fundo_final_azul.png").convert() #mudar depois pra tela inicial 
+tela_info = pygame.transform.scale(tela_info, (largura, altura))
+
 
 #Imagem flecha 
 flecha_img = pygame.image.load("imagens/flecha.png").convert_alpha()
