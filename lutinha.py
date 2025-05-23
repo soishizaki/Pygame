@@ -60,13 +60,13 @@ fundo_inicial = pygame.transform.scale(fundo_inicial, (largura, altura))
 botao_start = pygame.Rect(340, 450, 250, 90)  
 
 # Botões e tela info 
-botao_info = pygame.Rect(340, 450, 125, 45)  
+botao_info = pygame.Rect(410, 205, 125, 100)  
 botao_info_img = pygame.image.load("imagens/botao_info.png")
-botao_info_img = pygame.transform.scale(botao_info_img, (125, 45))
+botao_info_img = pygame.transform.scale(botao_info_img, (125, 100))
 
-botao_back = pygame.Rect(50, 50, 125, 45)  
+botao_back = pygame.Rect(50, 50, 125, 100)  
 botao_back_img = pygame.image.load("imagens/botao_back.png")
-botao_back_img = pygame.transform.scale(botao_back_img, (125, 45))
+botao_back_img = pygame.transform.scale(botao_back_img, (125, 100))
 
 tela_info = pygame.image.load("imagens/fundo_final_azul.png").convert() #mudar depois pra tela inicial 
 tela_info = pygame.transform.scale(tela_info, (largura, altura))
@@ -222,18 +222,41 @@ fruta_img = pygame.transform.scale(fruta_img, (70, 70)) #ajuste tamanho
 def mostrar_tela_inicial():
     while True:
         tela.blit(fundo_inicial, (0, 0))  # Desenha a imagem na tela
+        tela.blit(botao_info_img, botao_info.topleft) # Desenha botão de start 
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 pygame.quit()
                 exit()
             if evento.type == pygame.MOUSEBUTTONDOWN:
+                if botao_info.collidepoint(evento.pos):
+                    som_botao.play()
+                    mostrar_tela_info()
                 if botao_start.collidepoint(evento.pos):
                     som_botao.play()
                     return  # Sai da tela inicial
 
         pygame.display.flip()
         clock.tick(60)
+
+def mostrar_tela_info():
+    while True: 
+        tela.blit(tela_info, (0, 0))  # Desenha a imagem na tela
+        tela.blit(botao_back_img, botao_back.topleft) # Desenha botão back 
+
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if evento.type == pygame.MOUSEBUTTONDOWN:
+                if botao_back.collidepoint(evento.pos):
+                    som_botao.play()
+                    return 
+                
+        pygame.display.flip()
+        clock.tick(60)
+
+
 
 # Função para mostrar tela de vitória (IMPORTANTE: MUDAR A IMAGEM DO FUNDO VITÓRIA)
 def mostrar_tela_vitoria(vencedor):
