@@ -64,11 +64,11 @@ botao_info = pygame.Rect(410, 205, 125, 100)
 botao_info_img = pygame.image.load("imagens/botao_info.png")
 botao_info_img = pygame.transform.scale(botao_info_img, (125, 100))
 
-botao_back = pygame.Rect(50, 50, 125, 100)  
+botao_back = pygame.Rect(2, 10, 125, 100)  
 botao_back_img = pygame.image.load("imagens/botao_back.png")
 botao_back_img = pygame.transform.scale(botao_back_img, (125, 100))
 
-tela_info = pygame.image.load("imagens/fundo_final_azul.png").convert() #mudar depois pra tela inicial 
+tela_info = pygame.image.load("imagens/info.png").convert() 
 tela_info = pygame.transform.scale(tela_info, (largura, altura))
 
 
