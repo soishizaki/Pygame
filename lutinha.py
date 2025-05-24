@@ -220,6 +220,10 @@ fruta_img = pygame.transform.scale(fruta_img, (70, 70)) #ajuste tamanho
 
 # Função para mostrar a tela inicial 
 def mostrar_tela_inicial():
+    """
+    Exibe a tela inicial do jogo com opções de iniciar ou ver informações.
+    Espera interação do usuário para continuar.
+    """
     while True:
         tela.blit(fundo_inicial, (0, 0))  # Desenha a imagem na tela
         tela.blit(botao_info_img, botao_info.topleft) # Desenha botão de start 
@@ -240,6 +244,10 @@ def mostrar_tela_inicial():
         clock.tick(60)
 
 def mostrar_tela_info():
+    """
+    Exibe a tela com informações do jogo.
+    Retorna à tela inicial ao clicar no botão de voltar.
+    """
     while True: 
         tela.blit(tela_info, (0, 0))  # Desenha a imagem na tela
         tela.blit(botao_back_img, botao_back.topleft) # Desenha botão back 
@@ -258,8 +266,14 @@ def mostrar_tela_info():
 
 
 
-# Função para mostrar tela de vitória (IMPORTANTE: MUDAR A IMAGEM DO FUNDO VITÓRIA)
+# Função para mostrar tela de vitória 
 def mostrar_tela_vitoria(vencedor):
+    """
+    Exibe a tela de vitória para o jogador vencedor e aguarda o clique para reiniciar o jogo.
+
+    Parâmetros:
+    vencedor (str): "amarelo" ou outro valor para azul, indicando quem venceu.
+    """
     if vencedor == "amarelo":
         fundo_vitoria = pygame.image.load("imagens/fundo_final_amarelo.png").convert()
         fundo_vitoria = pygame.transform.scale(fundo_vitoria, (largura, altura))
@@ -286,6 +300,10 @@ def mostrar_tela_vitoria(vencedor):
 
 # Função para reiniciar o jogo (zera todas as variáveis)
 def reiniciar_jogo():
+    """
+    Reinicia o estado do jogo, redefinindo posições, vidas, plataformas,
+    itens, poderes e animações dos personagens.
+    """
     global x1, y1, vida1, pulo1, velocidade_pulo1, andando_sprite_espada_amarelo, andando_sprite_arco_amarelo
     global x2, y2, vida2, pulo2, velocidade_pulo2, andando_sprite_espada_azul, andando_sprite_arco_azul
     global poderes, itens, tiros, tempo_ataque_p1, tempo_ataque_p2
@@ -344,6 +362,9 @@ def reiniciar_jogo():
 
 # Função para desenhar barras de vida
 def desenhar_barras_de_vida():
+    """
+    Desenha as barras de vida de ambos os jogadores na tela, cada uma com a cor do personagem. 
+    """
     # Jogador 1 (azul)
     pygame.draw.rect(tela, (255, 0, 0), (50, 30, largura_barra, altura_barra))  # Barra vermelha (fundo)
     pygame.draw.rect(tela, (80, 150, 255), (50, 30, largura_barra * (vida2 / 100), altura_barra))  # Vida
@@ -354,6 +375,16 @@ def desenhar_barras_de_vida():
 
 # Função para ver se o personagem está no chão/plataforma
 def esta_no_chao_ou_plataforma(x, y):
+    """
+    Verifica se o personagem está no chão ou em uma plataforma.
+
+    Parâmetros:
+    x (int): Posição x do personagem.
+    y (int): Posição y do personagem.
+
+    Retorna:
+    bool: True se estiver no chão ou em uma plataforma, False caso contrário.
+    """
     rect = pygame.Rect(x, y, largura_personagem, altura_personagem)
     if y + altura_personagem >= chao:
         return True
@@ -363,12 +394,19 @@ def esta_no_chao_ou_plataforma(x, y):
     return False
 
 def spawn_item():
+    """
+    Gera um novo item (faca/espada, arma/arco ou fruta) em uma posição aleatória,
+    adicionando na lista de itens.
+    """
     tipo = random.choice(["faca", "arma", "fruta"])
     x = random.randint(50, largura - 70)
     y = random.randint(100, chao - 30)
     itens.append({"tipo": tipo, "rect": pygame.Rect(x, y, 20, 20)})
 
 def desenhar_itens():
+    """
+    Desenha todos os itens (faca/espada, arma/arco, fruta) ativos na tela.
+    """
     for item in itens:
         if item["tipo"] == "faca":
             tela.blit(faca_img, item["rect"])
@@ -379,6 +417,15 @@ def desenhar_itens():
 
 # Carrega e divide os sprites em listas de quadros (TRECHO GERADO PELO CHATGPT)
 def carregar_sprites(nome_arquivo):
+    """
+    Carrega uma spritesheet e divide em uma lista de 6 quadros (frames).
+
+    Parâmetros:
+    nome_arquivo (str): Caminho para o arquivo de imagem da spritesheet.
+
+    Retorna:
+    list: Lista contendo os 6 quadros da animação como superfícies Pygame.
+    """
     imagem = pygame.image.load(nome_arquivo).convert_alpha()
     largura_quadro = imagem.get_width() // 6
     altura_quadro = imagem.get_height()
