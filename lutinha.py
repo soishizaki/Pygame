@@ -9,12 +9,12 @@ pygame.mixer.init()
 
 # Sons 
 
-#Fundo
+    #Fundo
 pygame.mixer.music.load("sons/som_fundo.mp3")
 pygame.mixer.music.set_volume(0.04)
 pygame.mixer.music.play(-1)
 
-#Efeitos
+    #Efeitos 
 som_ataque_espada = pygame.mixer.Sound("sons/som_espada.mp3")
 som_ataque_flecha = pygame.mixer.Sound ("sons/som_flecha.wav")
 som_botao = pygame.mixer.Sound("sons/som_botao_e_flecha.mp3")
@@ -37,7 +37,7 @@ largura, altura = 1000, 600
 tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Pixel Clash")
 
-# Determina o fundo (6 opcoes de fundo que serao escolhidas de forma aleatoria)
+# Determina o fundo (6 opções de fundo que serão escolhidas de forma aleatória)
 opcoes_de_fundos = [
     "imagens/fundo1.png",
     "imagens/fundo2.png",
@@ -115,7 +115,7 @@ pode_usar_faca_p2 = True
 # Criação do relógio para controlar FPS
 clock = pygame.time.Clock()
 
-# 6 opcoes de plataformas (x, y, largura, altura), que serao escolhidas de forma aleatoria        #Rect cria retângulo 
+# 6 opções de plataformas (x, y, largura, altura), que serão escolhidas de forma aleatória      
 plataformas1 = [
     pygame.Rect(200, 400, 400, 20),
     pygame.Rect(500, 300, 200, 20),
@@ -206,7 +206,7 @@ indice_animacao2 = 0
 tempo_ultima_animacao = 0
 intervalo_animacao = 100  # milissegundos entre quadros
 
-# Ícones dos itens (depois a gnt troca pra imagem) 
+# Ícones dos itens
 faca_img = pygame.image.load("imagens/espada.png").convert_alpha()
 faca_img = pygame.transform.scale(faca_img, (55, 55)) #ajuste tamanho 
 
@@ -618,7 +618,7 @@ while game:
     # Desenha o fundo na tela
     tela.blit(fundo, (0, 0))
 
-    # Desenhar plataformas
+    # Desenha plataformas
     for plataforma in plataformas:
     # Redimensiona a imagem para o tamanho da plataforma (largura, altura) e desenha
         plataforma_img_tamanho_certo = pygame.transform.scale(plataforma_img, (plataforma.width+10, plataforma.height+170))
@@ -627,7 +627,7 @@ while game:
 
     # Desenha os dois personagens, barras de vida e itens
 
-    # Jogador 1
+        # Jogador 1
     agora_ms = pygame.time.get_ticks()
     if agora_ms - tempo_ataque_p1 < duracao_ataque:
         if poderes["p1_faca"] > time.time():
@@ -648,10 +648,8 @@ while game:
         sprite1 = pygame.transform.flip(sprite1, True, False)
     sprite1_rect = sprite1.get_rect()
     tela.blit(sprite1, (x1 - sprite1_rect.width/3-10, y1 - sprite1_rect.height/3))
-    # pygame.draw.rect(tela, (255,0,0), rect1)
 
-    # Jogador 2
-    #sprite2 = sprites_azul[indice_animacao2] if jogador2_andando else sprites_azul[0]
+        # Jogador 2
     agora_ms = pygame.time.get_ticks()
     if agora_ms - tempo_ataque_p2 < duracao_ataque:
         if poderes["p2_faca"] > time.time():
@@ -720,7 +718,7 @@ while game:
 
 
 
-    #ATAQUE (TESTE 1)
+    # Parâmetros do ataque 
 
     agora = time.time()
     dano_faca = 2
