@@ -1,11 +1,6 @@
 # Pygame
 Pygame Dessoft - Insper 2025.1
 
-coisas pra fazer:
-- adicionar tela de info e botao/estrututra
-- adicionar docstring nas funções
-
-
 
 PIXEL CLASH
 
@@ -45,6 +40,12 @@ L – Atacar com aespada/arco (se estiver equipado)
 
 
 -----------------------------------------------------
+
+Fontes: 
+
+
+https://pixelfrog-assets.itch.io/tiny-swords (repositorio de imagens para os personagens)
+
 
 
 COMO RODAR O JOGO
