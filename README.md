@@ -45,6 +45,7 @@ Fontes:
 
 
 https://pixelfrog-assets.itch.io/tiny-swords (repositorio de imagens para os personagens)
+https://chatgpt.com/?model=gpt-4o (imagens de fundo)
 
 
 
