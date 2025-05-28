@@ -46,7 +46,7 @@ Fontes:
 
 https://pixelfrog-assets.itch.io/tiny-swords (repositório de imagens para os personagens)
 https://chatgpt.com/?model=gpt-4o (imagens de fundo)
-
+https://freesound.org/ (sons)
 
 
 COMO RODAR O JOGO
